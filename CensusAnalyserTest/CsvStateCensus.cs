@@ -12,7 +12,7 @@ namespace CensusAnalyserTest
         /// To load csv data
         /// </summary>
         int totalRecord = 0;
-        public int LoadStateData(string path, char delimiter = ',',string header= "State,Population,AreaInSqKm,DensityPerSqKm")
+        public int LoadStateData(string path, char delimiter = ',', string header = "State,Population,AreaInSqKm,DensityPerSqKm")
         {
             try
             {
@@ -28,7 +28,6 @@ namespace CensusAnalyserTest
                 string[] str = File.ReadAllLines(path);
                 foreach (string line in str)
                 {
-                    //  totalRecord++;
                     string[] csvline = line.Split(delimiter);
                     if (csvline.Length != 4 && csvline.Length != 2)
                     {
@@ -53,7 +52,6 @@ namespace CensusAnalyserTest
 
             catch (Exception e)
             {
-               // Console.WriteLine(e.Message);
                 throw;
             }
         }
