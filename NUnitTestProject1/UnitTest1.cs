@@ -8,6 +8,7 @@ namespace NUnitTestProject1
         string wrong_path = @"D:\Imran\CensusAnalyser\CSVFile\StateCensusData.csv";
         string wrong_file_Extension = @"D:\Imran\CensusAnalyser\CensusAnalyserTest\CSVFile\StateCensusData.csveg";
         StateCensusAnalyser stateanalyser = new StateCensusAnalyser();
+        CsvStateCensus csvstatecensus = new CsvStateCensus();
         [SetUp]
         public void Setup()
         {
@@ -53,6 +54,16 @@ namespace NUnitTestProject1
         {
             var val = Assert.Throws<CensusAnalyserException>(() => stateanalyser.LoadStateData(path,'m'));
             Assert.AreEqual("Wrong_Delimiter", val.GetMessage);
+        }
+        /// <summary>
+        /// Headers the test.
+        /// TestCase 1.5
+        /// </summary>
+        [Test]
+        public void HeaderTest()
+        {
+            var val = Assert.Throws<CensusAnalyserException>(() => csvstatecensus.LoadStateData(path,',',"State, Population, AreaInSqKm, DensityPerSqKm"));
+            Assert.AreEqual("No_Header", val.GetMessage);
         }
     }
 }
