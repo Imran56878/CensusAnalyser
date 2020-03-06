@@ -21,8 +21,8 @@ namespace NUnitTestProject1
         [Test]
         public void StateCensusAnalyserTestRecord()
         {
-          int match=  stateanalyser.LoadStateData(path);
-            Assert.AreEqual(30,match);
+            int match = stateanalyser.LoadStateData(path);
+            Assert.AreEqual(30, match);
         }
         /// <summary>
         /// Wrongs the file path.
@@ -52,7 +52,7 @@ namespace NUnitTestProject1
         [Test]
         public void WrongDelimeter()
         {
-            var val = Assert.Throws<CensusAnalyserException>(() => stateanalyser.LoadStateData(path,'m'));
+            var val = Assert.Throws<CensusAnalyserException>(() => stateanalyser.LoadStateData(path, '.'));
             Assert.AreEqual("Wrong_Delimiter", val.GetMessage);
         }
         /// <summary>
@@ -62,8 +62,9 @@ namespace NUnitTestProject1
         [Test]
         public void HeaderTest()
         {
-            var val = Assert.Throws<CensusAnalyserException>(() => csvstatecensus.LoadStateData(path,',',"State, Population, AreaInSqKm, DensityPerSqKm"));
+            var val = Assert.Throws<CensusAnalyserException>(() => stateanalyser.LoadStateData(path, ',',"State,Phopulation,AreaInSqKm,DensityPerSqKm"));
             Assert.AreEqual("No_Header", val.GetMessage);
         }
+        
     }
 }
