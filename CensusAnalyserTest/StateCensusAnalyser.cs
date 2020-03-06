@@ -8,6 +8,10 @@ using Microsoft.VisualBasic.FileIO;
 
 namespace CensusAnalyserTest
 {
+    /// <summary>
+    /// This class is used for checking the record 
+    /// or file path or given csv extension is not found  
+    /// </summary>
     public class StateCensusAnalyser
     {
         int totalRecord = 0;
@@ -33,13 +37,16 @@ namespace CensusAnalyserTest
                     {
                         throw new CensusAnalyserException("Wrong_Delimiter");
                     }
-
                 }
                 if (str[0] != "State,Population,AreaInSqKm,DensityPerSqKm")
                 {
                     throw new CensusAnalyserException("Wrong paramter ");
                 }
-                totalRecord = str.Length;
+                IEnumerable<string> enumerable = str;
+                foreach (string line in enumerable )
+                {
+                    totalRecord++;
+                }
             return totalRecord;
             }
 

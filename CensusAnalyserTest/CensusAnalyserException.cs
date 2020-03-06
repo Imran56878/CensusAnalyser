@@ -16,7 +16,7 @@ namespace CensusAnalyserTest
         /// Initializes a new instance of the <see cref="CensusAnalyserException"/> class.
         /// </summary>
         /// <param name="msg">The MSG.</param>
-        public CensusAnalyserException(string msg)
+        public CensusAnalyserException(string msg) :base(msg)
         {
             this.message = msg;
         }
