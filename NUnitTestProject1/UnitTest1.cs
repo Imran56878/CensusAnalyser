@@ -44,5 +44,15 @@ namespace NUnitTestProject1
             var val = Assert.Throws<CensusAnalyserException>(() => stateanalyser.LoadStateData(wrong_file_Extension));
             Assert.AreEqual("Wrong_File_Extension", val.GetMessage);
         }
+        /// <summary>
+        /// Wrongs the delimeter.
+        /// TestCase 1.4
+        /// </summary>
+        [Test]
+        public void WrongDelimeter()
+        {
+            var val = Assert.Throws<CensusAnalyserException>(() => stateanalyser.LoadStateData(path,'m'));
+            Assert.AreEqual("Wrong_Delimiter", val.GetMessage);
+        }
     }
 }
