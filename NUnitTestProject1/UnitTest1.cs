@@ -15,6 +15,7 @@ namespace NUnitTestProject1
         /// <summary>
         /// States the census analyser test record.
         /// It will check the total record  .
+        /// TestCase1.1
         /// </summary>
         [Test]
         public void StateCensusAnalyserTestRecord()
@@ -25,12 +26,23 @@ namespace NUnitTestProject1
         /// <summary>
         /// Wrongs the file path.
         /// file is not Exist
+        /// TestCase1.2
         /// </summary>
         [Test]
         public void WrongFilePath()
         {
             var val = Assert.Throws<CensusAnalyserException>(() => stateanalyser.LoadStateData(wrong_path));
             Assert.AreEqual("File_Not_Exist", val.GetMessage);
+        }
+        /// <summary>
+        /// Wrongs the file extension.
+        /// TestCase 1.3
+        /// </summary>
+        [Test]
+        public void WrongFileExtension()
+        {
+            var val = Assert.Throws<CensusAnalyserException>(() => stateanalyser.LoadStateData(wrong_file_Extension));
+            Assert.AreEqual("Wrong_File_Extension", val.GetMessage);
         }
     }
 }
