@@ -22,6 +22,15 @@ namespace NUnitTestProject1
           int match=  stateanalyser.LoadStateData(path);
             Assert.AreEqual(30,match);
         }
-       
+        /// <summary>
+        /// Wrongs the file path.
+        /// file is not Exist
+        /// </summary>
+        [Test]
+        public void WrongFilePath()
+        {
+            var val = Assert.Throws<CensusAnalyserException>(() => stateanalyser.LoadStateData(wrong_path));
+            Assert.AreEqual("File_Not_Exist", val.GetMessage);
+        }
     }
 }
