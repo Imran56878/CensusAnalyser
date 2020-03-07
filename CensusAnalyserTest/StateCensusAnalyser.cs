@@ -15,32 +15,12 @@ namespace CensusAnalyserTest
     public class StateCensusAnalyser
     {
         int totalRecord = 0;
-        public int LoadStateData(string path, char delimiter = ',', string header = "State,Population,AreaInSqKm,DensityPerSqKm")
+        public int LoadStateData(string path )
         {
             try
             {
-                if (Path.GetExtension(path) != ".csv")
-                {
-                    throw new CensusAnalyserException("Wrong_File_Extension");
-                }
-
-                else if (!File.Exists(path))
-                {
-                    throw new CensusAnalyserException("File_Not_Exist");
-                }
+               
                 string[] str = File.ReadAllLines(path);
-                foreach (string line in str)
-                {
-                    string[] csvline = line.Split(delimiter);
-                    if(csvline.Length !=4 && csvline.Length != 2)
-                    {
-                        throw new CensusAnalyserException("Wrong_Delimiter");
-                    }
-                }
-                if (str[0] != header)
-                {
-                    throw new CensusAnalyserException("No_Header");
-                }
                 ///<summary>
                 ///  It will iterate
                 ///  the csv file 
@@ -49,11 +29,12 @@ namespace CensusAnalyserTest
                 foreach (string line in enumerable )
                 {
                     totalRecord++;
+                    Console.WriteLine(line );
                 }
             return totalRecord;
             }
 
-            catch (Exception e)
+            catch (Exception )
             {
                 throw ;
             }
