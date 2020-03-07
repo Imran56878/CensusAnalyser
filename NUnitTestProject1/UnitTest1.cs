@@ -7,8 +7,8 @@ namespace NUnitTestProject1
     /// </summary>
     public class Tests
     {
-        string path = @"D:\Imran\CensusAnalyser\CensusAnalyserTest\CSVFile\StateCensusData.csv";
-        string state_path = @"D:\Imran\CensusAnalyser\CensusAnalyserTest\CSVFile\StateCode.csv";
+        string state_census_path = @"D:\Imran\CensusAnalyser\CensusAnalyserTest\CSVFile\StateCensusData.csv";
+        string state_code_path = @"D:\Imran\CensusAnalyser\CensusAnalyserTest\CSVFile\StateCode.csv";
         string wrong_path = @"D:\Imran\CensusAnalyser\CSVFile\StateCensusData.csv";
         string wrong_file_Extension = @"D:\Imran\CensusAnalyser\CensusAnalyserTest\CSVFile\StateCensusData.csveg";
         string State_Code_Extension= @"D:\Imran\CensusAnalyser\CensusAnalyserTest\CSVFile\StateCode.csev";
@@ -30,7 +30,7 @@ namespace NUnitTestProject1
         [Test]
         public void StateCensusAnalyserTestRecord()
         {
-            int match = stateanalyser.LoadStateData(path);
+            int match = stateanalyser.LoadStateData(state_census_path);
             Assert.AreEqual(30, match);
         }
         /// <summary>
@@ -61,7 +61,7 @@ namespace NUnitTestProject1
         [Test]
         public void WrongDelimeter()
         {
-            var val = Assert.Throws<CensusAnalyserException>(() => csvstatecensus.LoadStateData(path, '.'));
+            var val = Assert.Throws<CensusAnalyserException>(() => csvstatecensus.LoadStateData(state_census_path, '.'));
             Assert.AreEqual("Wrong_Delimiter", val.GetMessage);
         }
         /// <summary>
@@ -71,7 +71,7 @@ namespace NUnitTestProject1
         [Test]
         public void HeaderTest()
         {
-            var val = Assert.Throws<CensusAnalyserException>(() => csvstatecensus.LoadStateData(path, ',',"State,Phopulation,AreaInSqKm,DensityPerSqKm"));
+            var val = Assert.Throws<CensusAnalyserException>(() => csvstatecensus.LoadStateData(state_census_path, ',',"State,Phopulation,AreaInSqKm,DensityPerSqKm"));
             Assert.AreEqual("No_Header", val.GetMessage);
         }
         /// <summary>
@@ -81,8 +81,8 @@ namespace NUnitTestProject1
         public void RecOrdMatch()
         {
 
-            int match = stateanalyser.LoadStateData(state_path);
-            int match1 = csvstate.LoadStateData(state_path );
+            int match = stateanalyser.LoadStateData(state_code_path);
+            int match1 = csvstate.LoadStateData(state_code_path);
             Assert.AreEqual(match, match1);
         }
         /// <summary>
@@ -104,6 +104,13 @@ namespace NUnitTestProject1
             var csv_state_census_Extension = Assert.Throws<CensusAnalyserException>(() => csvstatecensus.LoadStateData(wrong_file_Extension));
             var csv_state_Code_Extension = Assert.Throws<CensusAnalyserException>(() => csvstate.LoadStateData(State_Code_Extension));
             Assert.AreEqual(csv_state_Code_Extension.GetMessage ,csv_state_census_Extension.GetMessage);
+        }
+        [Test]
+        public void Wrong_Delimiter_Compare_CSV_State()
+        {
+            var csv_state_census_data_delimeter = Assert.Throws<CensusAnalyserException>(() => csvstatecensus.LoadStateData(state_census_path, '.'));
+            var state_code_data_delimeter = Assert.Throws<CensusAnalyserException>(() => csvstate.LoadStateData(state_code_path, '.'));
+            Assert.AreEqual(csv_state_census_data_delimeter.GetMessage, state_code_data_delimeter.GetMessage);
         }
     }
 }
