@@ -11,6 +11,9 @@ namespace CensusAnalyserTest
             StateCensusAnalyser at = new StateCensusAnalyser();
            int a= at.LoadStateData(path);
             Console.WriteLine("Total record :"+a);
-        }
+            CSVState csvstate = new CSVState();
+            int b = csvstate.LoadStateData(@"D:\Imran\CensusAnalyser\CensusAnalyserTest\CSVFile\StateCode.csv");
+            Console.WriteLine("b :"+b);
+        }                       
     }
 }

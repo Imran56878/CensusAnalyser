@@ -15,28 +15,19 @@ namespace CensusAnalyserTest
     public class StateCensusAnalyser
     {
         int totalRecord = 0;
-        public int LoadStateData(string path )
+        public int LoadStateData(string path)
         {
             try
             {
-               
+
                 string[] str = File.ReadAllLines(path);
-                ///<summary>
-                ///  It will iterate
-                ///  the csv file 
-                ///</summary>
-                IEnumerable<string> enumerable = str;
-                foreach (string line in enumerable )
-                {
-                    totalRecord++;
-                    Console.WriteLine(line );
-                }
-            return totalRecord;
+                totalRecord = str.Length;
+                return totalRecord;
             }
 
-            catch (Exception )
+            catch (Exception)
             {
-                throw ;
+                throw;
             }
         }
     }
