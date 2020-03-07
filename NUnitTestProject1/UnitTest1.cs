@@ -84,5 +84,15 @@ namespace NUnitTestProject1
             int match1 = csvstate.LoadStateData(state_path );
             Assert.AreEqual(match, match1);
         }
+        /// <summary>
+        /// Wrongs the state of the file path compare CSV.
+        /// </summary>
+        [Test]
+        public void Wrong_File_Path_Compare_CSV_State()
+        {
+            var csv_state_census = Assert.Throws<CensusAnalyserException>(() => csvstatecensus.LoadStateData(wrong_path));
+            var csv_state = Assert.Throws<CensusAnalyserException>(() => csvstate.LoadStateData(wrong_path));
+            Assert.AreEqual(csv_state_census.GetMessage , csv_state.GetMessage);
+        }
     }
 }
