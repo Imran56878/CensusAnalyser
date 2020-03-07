@@ -11,6 +11,7 @@ namespace NUnitTestProject1
         string state_path = @"D:\Imran\CensusAnalyser\CensusAnalyserTest\CSVFile\StateCode.csv";
         string wrong_path = @"D:\Imran\CensusAnalyser\CSVFile\StateCensusData.csv";
         string wrong_file_Extension = @"D:\Imran\CensusAnalyser\CensusAnalyserTest\CSVFile\StateCensusData.csveg";
+        string State_Code_Extension= @"D:\Imran\CensusAnalyser\CensusAnalyserTest\CSVFile\StateCode.csev";
         StateCensusAnalyser stateanalyser = new StateCensusAnalyser();
         CSVState csvstate = new CSVState();
         /// <summary>
@@ -93,6 +94,16 @@ namespace NUnitTestProject1
             var csv_state_census = Assert.Throws<CensusAnalyserException>(() => csvstatecensus.LoadStateData(wrong_path));
             var csv_state = Assert.Throws<CensusAnalyserException>(() => csvstate.LoadStateData(wrong_path));
             Assert.AreEqual(csv_state_census.GetMessage , csv_state.GetMessage);
+        }
+        /// <summary>
+        /// Wrongs the state of the file extension compare CSV.
+        /// </summary>
+        [Test]
+        public void Wrong_File_Extension_Compare_CSV_State()
+        {
+            var csv_state_census_Extension = Assert.Throws<CensusAnalyserException>(() => csvstatecensus.LoadStateData(wrong_file_Extension));
+            var csv_state_Code_Extension = Assert.Throws<CensusAnalyserException>(() => csvstate.LoadStateData(State_Code_Extension));
+            Assert.AreEqual(csv_state_Code_Extension.GetMessage ,csv_state_census_Extension.GetMessage);
         }
     }
 }
