@@ -75,6 +75,7 @@ namespace NUnitTestProject1
             Assert.AreEqual("No_Header", val.GetMessage);
         }
         /// <summary>
+        /// TestCase 2.1
         /// Records the ord matchof StateCode.csv
        /// </summary>
         [Test]
@@ -86,6 +87,7 @@ namespace NUnitTestProject1
             Assert.AreEqual(match, match1);
         }
         /// <summary>
+        /// TestCase 2.2
         /// Wrongs the state of the file path compare CSV.
         /// </summary>
         [Test]
@@ -96,6 +98,7 @@ namespace NUnitTestProject1
             Assert.AreEqual(csv_state_census.GetMessage , csv_state.GetMessage);
         }
         /// <summary>
+        /// TestCase 2.3
         /// Wrongs the state of the file extension compare CSV.
         /// </summary>
         [Test]
@@ -106,6 +109,7 @@ namespace NUnitTestProject1
             Assert.AreEqual(csv_state_Code_Extension.GetMessage ,csv_state_census_Extension.GetMessage);
         }
         /// <summary>
+        /// TestCase 2.4
         /// Wrongs the state of the delimiter compare CSV.
         /// </summary>
         [Test]
@@ -116,6 +120,7 @@ namespace NUnitTestProject1
             Assert.AreEqual(csv_state_census_data_delimeter.GetMessage, state_code_data_delimeter.GetMessage);
         }
         /// <summary>
+        /// TestCase 2.5
         /// Wrongs the state of the header compare CSV.
         /// </summary>
         [Test]
