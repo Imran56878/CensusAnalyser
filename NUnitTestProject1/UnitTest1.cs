@@ -11,7 +11,7 @@ namespace NUnitTestProject1
         string state_code_path = @"D:\Imran\CensusAnalyser\CensusAnalyserTest\CSVFile\StateCode.csv";
         string wrong_path = @"D:\Imran\CensusAnalyser\CSVFile\StateCensusData.csv";
         string wrong_file_Extension = @"D:\Imran\CensusAnalyser\CensusAnalyserTest\CSVFile\StateCensusData.csveg";
-        string State_Code_Extension= @"D:\Imran\CensusAnalyser\CensusAnalyserTest\CSVFile\StateCode.csev";
+        string State_Code_Extension = @"D:\Imran\CensusAnalyser\CensusAnalyserTest\CSVFile\StateCode.csev";
         StateCensusAnalyser stateanalyser = new StateCensusAnalyser();
         CSVState csvstate = new CSVState();
         /// <summary>
@@ -71,20 +71,19 @@ namespace NUnitTestProject1
         [Test]
         public void HeaderTest()
         {
-            var val = Assert.Throws<CensusAnalyserException>(() => csvstatecensus.LoadStateData(state_census_path, ',',"State,Phopulation,AreaInSqKm,DensityPerSqKm"));
+            var val = Assert.Throws<CensusAnalyserException>(() => csvstatecensus.LoadStateData(state_census_path, ',', "State,Phopulation,AreaInSqKm,DensityPerSqKm"));
             Assert.AreEqual("No_Header", val.GetMessage);
         }
         /// <summary>
         /// TestCase 2.1
-        /// Records the ord matchof StateCode.csv
-       /// </summary>
+        /// Records the compare count match.
+        /// </summary>
         [Test]
-        public void RecOrdMatch()
+        public void Record_Compare_Count_Match()
         {
-
-            int match = stateanalyser.LoadStateData(state_code_path);
-            int match1 = csvstate.LoadStateData(state_code_path);
-            Assert.AreEqual(match, match1);
+            int Census_data_record = stateanalyser.LoadStateData(state_census_path);
+            int State_code_record = csvstate.LoadStateData(state_code_path);
+            Assert.AreNotEqual(Census_data_record, State_code_record);
         }
         /// <summary>
         /// TestCase 2.2
@@ -95,7 +94,7 @@ namespace NUnitTestProject1
         {
             var csv_state_census = Assert.Throws<CensusAnalyserException>(() => csvstatecensus.LoadStateData(wrong_path));
             var csv_state = Assert.Throws<CensusAnalyserException>(() => csvstate.LoadStateData(wrong_path));
-            Assert.AreEqual(csv_state_census.GetMessage , csv_state.GetMessage);
+            Assert.AreEqual(csv_state_census.GetMessage, csv_state.GetMessage);
         }
         /// <summary>
         /// TestCase 2.3
@@ -106,7 +105,7 @@ namespace NUnitTestProject1
         {
             var csv_state_census_Extension = Assert.Throws<CensusAnalyserException>(() => csvstatecensus.LoadStateData(wrong_file_Extension));
             var csv_state_Code_Extension = Assert.Throws<CensusAnalyserException>(() => csvstate.LoadStateData(State_Code_Extension));
-            Assert.AreEqual(csv_state_Code_Extension.GetMessage ,csv_state_census_Extension.GetMessage);
+            Assert.AreEqual(csv_state_Code_Extension.GetMessage, csv_state_census_Extension.GetMessage);
         }
         /// <summary>
         /// TestCase 2.4
@@ -127,7 +126,7 @@ namespace NUnitTestProject1
         public void wrong_header_Compare_csv_state()
         {
             var csv_state_census_Header = Assert.Throws<CensusAnalyserException>(() => csvstatecensus.LoadStateData(state_census_path, ',', "State,Phopulation,AreaInSqKm,DensityPerSqKm"));
-            var csv_state_Header = Assert.Throws<CensusAnalyserException>(() => csvstate.LoadStateData(state_code_path , ',', "SrNo,State,Name"));
+            var csv_state_Header = Assert.Throws<CensusAnalyserException>(() => csvstate.LoadStateData(state_code_path, ',', "SrNo,State,Name"));
             Assert.AreEqual(csv_state_census_Header.GetMessage, csv_state_Header.GetMessage);
         }
     }
