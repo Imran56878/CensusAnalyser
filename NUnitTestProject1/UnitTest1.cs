@@ -105,12 +105,25 @@ namespace NUnitTestProject1
             var csv_state_Code_Extension = Assert.Throws<CensusAnalyserException>(() => csvstate.LoadStateData(State_Code_Extension));
             Assert.AreEqual(csv_state_Code_Extension.GetMessage ,csv_state_census_Extension.GetMessage);
         }
+        /// <summary>
+        /// Wrongs the state of the delimiter compare CSV.
+        /// </summary>
         [Test]
         public void Wrong_Delimiter_Compare_CSV_State()
         {
             var csv_state_census_data_delimeter = Assert.Throws<CensusAnalyserException>(() => csvstatecensus.LoadStateData(state_census_path, '.'));
             var state_code_data_delimeter = Assert.Throws<CensusAnalyserException>(() => csvstate.LoadStateData(state_code_path, '.'));
             Assert.AreEqual(csv_state_census_data_delimeter.GetMessage, state_code_data_delimeter.GetMessage);
+        }
+        /// <summary>
+        /// Wrongs the state of the header compare CSV.
+        /// </summary>
+        [Test]
+        public void wrong_header_Compare_csv_state()
+        {
+            var csv_state_census_Header = Assert.Throws<CensusAnalyserException>(() => csvstatecensus.LoadStateData(state_census_path, ',', "State,Phopulation,AreaInSqKm,DensityPerSqKm"));
+            var csv_state_Header = Assert.Throws<CensusAnalyserException>(() => csvstate.LoadStateData(state_code_path , ',', "SrNo,State,Name"));
+            Assert.AreEqual(csv_state_census_Header.GetMessage, csv_state_Header.GetMessage);
         }
     }
 }
