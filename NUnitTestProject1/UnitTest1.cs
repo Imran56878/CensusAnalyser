@@ -2,12 +2,18 @@ using NUnit.Framework;
 using CensusAnalyserTest;
 namespace NUnitTestProject1
 {
+    /// <summary>
+    /// This class is for testing purpose.
+    /// </summary>
     public class Tests
     {
         string path = @"D:\Imran\CensusAnalyser\CensusAnalyserTest\CSVFile\StateCensusData.csv";
         string wrong_path = @"D:\Imran\CensusAnalyser\CSVFile\StateCensusData.csv";
         string wrong_file_Extension = @"D:\Imran\CensusAnalyser\CensusAnalyserTest\CSVFile\StateCensusData.csveg";
         StateCensusAnalyser stateanalyser = new StateCensusAnalyser();
+        /// <summary>
+        /// The csvstatecensus
+        /// </summary>
         CsvStateCensus csvstatecensus = new CsvStateCensus();
         [SetUp]
         public void Setup()
@@ -32,7 +38,7 @@ namespace NUnitTestProject1
         [Test]
         public void WrongFilePath()
         {
-            var val = Assert.Throws<CensusAnalyserException>(() => stateanalyser.LoadStateData(wrong_path));
+            var val = Assert.Throws<CensusAnalyserException>(() => csvstatecensus.LoadStateData(wrong_path));
             Assert.AreEqual("File_Not_Exist", val.GetMessage);
         }
         /// <summary>
@@ -42,7 +48,7 @@ namespace NUnitTestProject1
         [Test]
         public void WrongFileExtension()
         {
-            var val = Assert.Throws<CensusAnalyserException>(() => stateanalyser.LoadStateData(wrong_file_Extension));
+            var val = Assert.Throws<CensusAnalyserException>(() => csvstatecensus.LoadStateData(wrong_file_Extension));
             Assert.AreEqual("Wrong_File_Extension", val.GetMessage);
         }
         /// <summary>
@@ -52,7 +58,7 @@ namespace NUnitTestProject1
         [Test]
         public void WrongDelimeter()
         {
-            var val = Assert.Throws<CensusAnalyserException>(() => stateanalyser.LoadStateData(path, '.'));
+            var val = Assert.Throws<CensusAnalyserException>(() => csvstatecensus.LoadStateData(path, '.'));
             Assert.AreEqual("Wrong_Delimiter", val.GetMessage);
         }
         /// <summary>
@@ -62,9 +68,8 @@ namespace NUnitTestProject1
         [Test]
         public void HeaderTest()
         {
-            var val = Assert.Throws<CensusAnalyserException>(() => stateanalyser.LoadStateData(path, ',',"State,Phopulation,AreaInSqKm,DensityPerSqKm"));
+            var val = Assert.Throws<CensusAnalyserException>(() => csvstatecensus.LoadStateData(path, ',',"State,Phopulation,AreaInSqKm,DensityPerSqKm"));
             Assert.AreEqual("No_Header", val.GetMessage);
         }
-        
     }
 }
