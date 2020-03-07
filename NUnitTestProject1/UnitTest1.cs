@@ -8,9 +8,11 @@ namespace NUnitTestProject1
     public class Tests
     {
         string path = @"D:\Imran\CensusAnalyser\CensusAnalyserTest\CSVFile\StateCensusData.csv";
+        string state_path = @"D:\Imran\CensusAnalyser\CensusAnalyserTest\CSVFile\StateCode.csv";
         string wrong_path = @"D:\Imran\CensusAnalyser\CSVFile\StateCensusData.csv";
         string wrong_file_Extension = @"D:\Imran\CensusAnalyser\CensusAnalyserTest\CSVFile\StateCensusData.csveg";
         StateCensusAnalyser stateanalyser = new StateCensusAnalyser();
+        CSVState csvstate = new CSVState();
         /// <summary>
         /// The csvstatecensus
         /// </summary>
@@ -70,6 +72,17 @@ namespace NUnitTestProject1
         {
             var val = Assert.Throws<CensusAnalyserException>(() => csvstatecensus.LoadStateData(path, ',',"State,Phopulation,AreaInSqKm,DensityPerSqKm"));
             Assert.AreEqual("No_Header", val.GetMessage);
+        }
+        /// <summary>
+        /// Records the ord matchof StateCode.csv
+       /// </summary>
+        [Test]
+        public void RecOrdMatch()
+        {
+
+            int match = stateanalyser.LoadStateData(state_path);
+            int match1 = csvstate.LoadStateData(state_path );
+            Assert.AreEqual(match, match1);
         }
     }
 }
