@@ -2,6 +2,7 @@ using NUnit.Framework;
 using CensusAnalyserTest;
 namespace NUnitTestProject1
 {
+
     /// <summary>
     /// This class is for testing purpose.
     /// </summary>
@@ -14,6 +15,7 @@ namespace NUnitTestProject1
         string State_Code_Extension = @"D:\Imran\CensusAnalyser\CensusAnalyserTest\CSVFile\StateCode.csev";
         StateCensusAnalyser stateanalyser = new StateCensusAnalyser();
         CSVState csvstate = new CSVState();
+        CsvStateDelegat csvdlegate = new CsvStateDelegat(CSVState.LoadStateCsvData);
         /// <summary>
         /// The csvstatecensus
         /// </summary>
@@ -30,7 +32,7 @@ namespace NUnitTestProject1
         [Test]
         public void StateCensusAnalyserTestRecord()
         {
-            int match = stateanalyser.LoadStateData(state_census_path);
+            int match = stateanalyser.LoadStateCensusData(state_census_path);
             Assert.AreEqual(30, match);
         }
         /// <summary>
@@ -81,8 +83,8 @@ namespace NUnitTestProject1
         [Test]
         public void Record_Compare_Count_Match()
         {
-            int Census_data_record = stateanalyser.LoadStateData(state_census_path);
-            int State_code_record = csvstate.LoadStateData(state_code_path);
+            int Census_data_record = stateanalyser.LoadStateCensusData(state_census_path);
+            int State_code_record = csvdlegate(state_code_path);
             Assert.AreNotEqual(Census_data_record, State_code_record);
         }
         /// <summary>
@@ -93,7 +95,7 @@ namespace NUnitTestProject1
         public void Wrong_File_Path_Compare_CSV_State()
         {
             var csv_state_census = Assert.Throws<CensusAnalyserException>(() => csvstatecensus.LoadStateData(wrong_path));
-            var csv_state = Assert.Throws<CensusAnalyserException>(() => csvstate.LoadStateData(wrong_path));
+            var csv_state = Assert.Throws<CensusAnalyserException>(() => csvdlegate(wrong_path));
             Assert.AreEqual(csv_state_census.GetMessage, csv_state.GetMessage);
         }
         /// <summary>
@@ -104,7 +106,7 @@ namespace NUnitTestProject1
         public void Wrong_File_Extension_Compare_CSV_State()
         {
             var csv_state_census_Extension = Assert.Throws<CensusAnalyserException>(() => csvstatecensus.LoadStateData(wrong_file_Extension));
-            var csv_state_Code_Extension = Assert.Throws<CensusAnalyserException>(() => csvstate.LoadStateData(State_Code_Extension));
+            var csv_state_Code_Extension = Assert.Throws<CensusAnalyserException>(() => csvdlegate(State_Code_Extension));
             Assert.AreEqual(csv_state_Code_Extension.GetMessage, csv_state_census_Extension.GetMessage);
         }
         /// <summary>
@@ -115,7 +117,7 @@ namespace NUnitTestProject1
         public void Wrong_Delimiter_Compare_CSV_State()
         {
             var csv_state_census_data_delimeter = Assert.Throws<CensusAnalyserException>(() => csvstatecensus.LoadStateData(state_census_path, '.'));
-            var state_code_data_delimeter = Assert.Throws<CensusAnalyserException>(() => csvstate.LoadStateData(state_code_path, '.'));
+            var state_code_data_delimeter = Assert.Throws<CensusAnalyserException>(() => csvdlegate(state_code_path, '.'));
             Assert.AreEqual(csv_state_census_data_delimeter.GetMessage, state_code_data_delimeter.GetMessage);
         }
         /// <summary>
@@ -126,7 +128,7 @@ namespace NUnitTestProject1
         public void wrong_header_Compare_csv_state()
         {
             var csv_state_census_Header = Assert.Throws<CensusAnalyserException>(() => csvstatecensus.LoadStateData(state_census_path, ',', "State,Phopulation,AreaInSqKm,DensityPerSqKm"));
-            var csv_state_Header = Assert.Throws<CensusAnalyserException>(() => csvstate.LoadStateData(state_code_path, ',', "SrNo,State,Name"));
+            var csv_state_Header = Assert.Throws<CensusAnalyserException>(() => csvdlegate(state_code_path, ',', "SrNo,State,Name"));
             Assert.AreEqual(csv_state_census_Header.GetMessage, csv_state_Header.GetMessage);
         }
     }
