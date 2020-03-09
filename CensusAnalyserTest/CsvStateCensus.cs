@@ -50,7 +50,7 @@ namespace CensusAnalyserTest
                 return totalRecord;
             }
 
-            catch (Exception e)
+            catch (Exception)
             {
                 throw;
             }

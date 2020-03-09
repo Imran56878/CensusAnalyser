@@ -15,7 +15,7 @@ namespace CensusAnalyserTest
     public class StateCensusAnalyser
     {
         int totalRecord = 0;
-        public int LoadStateData(string path)
+        public int LoadStateCensusData(string path)
         {
             try
             {

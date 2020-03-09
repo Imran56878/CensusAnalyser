@@ -5,10 +5,21 @@ using System.Text;
 
 namespace CensusAnalyserTest
 {
-   public class CSVState
+    /// <summary>
+    /// A Delegate  that holds the reference of LoadStateData of CSVState class 
+    /// </summary>
+    /// <param name="path"></param>
+    /// <param name="delimiter"></param>
+    /// <param name="header"></param>
+    /// <returns></returns>
+    public delegate int CsvStateDelegat(string path, char delimiter = ',', string header = "SrNo,State,Name,TIN,StateCode");
+    /// <summary>
+    /// It read StateCode csv file .
+    /// </summary>
+    public class CSVState
     {
-        int totalRecord = 0;
-        public int LoadStateData(string path, char delimiter = ',', string header = "SrNo,State,Name,TIN,StateCode")
+        static int totalRecord = 0;
+        public static int LoadStateCsvData(string path, char delimiter = ',', string header = "SrNo,State,Name,TIN,StateCode")
         {
             try
             {
@@ -46,7 +57,7 @@ namespace CensusAnalyserTest
                 return totalRecord;
             }
 
-            catch (Exception e)
+            catch (Exception)
             {
                 throw;
             }
