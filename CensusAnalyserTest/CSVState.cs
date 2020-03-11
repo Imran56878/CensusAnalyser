@@ -16,10 +16,10 @@ namespace CensusAnalyserTest
     /// <summary>
     /// It read StateCode csv file .
     /// </summary>
-    public class CSVState
+    public class CSVState :ICSVBuilder 
     {
-        static int totalRecord = 0;
-        public static int LoadStateCsvData(string path, char delimiter = ',', string header = "SrNo,State,Name,TIN,StateCode")
+         int totalRecord = 0;
+        public   int LoadStateData(string path, char delimiter = ',', string header = "SrNo,State,Name,TIN,StateCode")
         {
             try
             {

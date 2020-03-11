@@ -12,10 +12,10 @@ namespace CensusAnalyserTest
     /// This class is used for checking the record 
     /// or file path or given csv extension is not found  
     /// </summary>
-    public class StateCensusAnalyser
+    public class StateCensusAnalyser :ICSVBuilder 
     {
         int totalRecord = 0;
-        public int LoadStateCensusData(string path)
+        public int LoadStateData(string path,char delimiter=',', string header = "State,Population,AreaInSqKm,DensityPerSqKm")
         {
             try
             {

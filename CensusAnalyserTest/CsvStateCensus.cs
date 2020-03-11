@@ -5,14 +5,14 @@ using System.Text;
 
 namespace CensusAnalyserTest
 {
-    public class CsvStateCensus
+    public class CsvStateCensus :ICSVBuilder 
     {
         /// <summary>
         /// The total record
         /// To load csv data
         /// </summary>
-        int totalRecord = 0;
-        public int LoadStateData(string path, char delimiter = ',', string header = "State,Population,AreaInSqKm,DensityPerSqKm")
+         int totalRecord = 0;
+        public  int LoadStateData(string path, char delimiter = ',', string header = "State,Population,AreaInSqKm,DensityPerSqKm")
         {
             try
             {
