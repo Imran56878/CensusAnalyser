@@ -1,5 +1,6 @@
 using NUnit.Framework;
 using CensusAnalyserTest;
+
 namespace NUnitTestProject1
 {
 
@@ -13,9 +14,9 @@ namespace NUnitTestProject1
         string wrong_path = @"D:\Imran\CensusAnalyser\CSVFile\StateCensusData.csv";
         string wrong_file_Extension = @"D:\Imran\CensusAnalyser\CensusAnalyserTest\CSVFile\StateCensusData.csveg";
         string State_Code_Extension = @"D:\Imran\CensusAnalyser\CensusAnalyserTest\CSVFile\StateCode.csev";
-        StateCensusAnalyser stateanalyser = new StateCensusAnalyser();
-        CSVState csvstate = new CSVState();
-        CsvStateDelegat csvdlegate = new CsvStateDelegat(CSVState.LoadStateCsvData);
+        string Census_Data_header = "State,Population,AreaInSqKm,DensityPerSqKm";
+       // CsvStateDelegat csvdlegate = new CsvStateDelegat(new CSVState().LoadStateData);
+        DelegateFactory delegateInstance = new DelegateFactory(CsvsStateFactory.GetInstance);
         /// <summary>
         /// The csvstatecensus
         /// </summary>
@@ -32,7 +33,8 @@ namespace NUnitTestProject1
         [Test]
         public void StateCensusAnalyserTestRecord()
         {
-            int match = stateanalyser.LoadStateCensusData(state_census_path);
+            var a = delegateInstance("StateCensusAnalyser");
+            int match = a.LoadStateData(state_census_path,',',Census_Data_header);
             Assert.AreEqual(30, match);
         }
         /// <summary>
@@ -41,9 +43,10 @@ namespace NUnitTestProject1
         /// TestCase1.2
         /// </summary>
         [Test]
-        public void WrongFilePath()
+        public void WrongFilePath_CsvStateCensus_StateCensusData()
         {
-            var val = Assert.Throws<CensusAnalyserException>(() => csvstatecensus.LoadStateData(wrong_path));
+            var a = delegateInstance("CsvStateCensus");
+            var val = Assert.Throws<CensusAnalyserException>(() => a.LoadStateData(wrong_path, ',', Census_Data_header));
             Assert.AreEqual("File_Not_Exist", val.GetMessage);
         }
         /// <summary>
@@ -51,9 +54,10 @@ namespace NUnitTestProject1
         /// TestCase 1.3
         /// </summary>
         [Test]
-        public void WrongFileExtension()
+        public void WrongFileExtension_CsvStateCensus_StateCensusData()
         {
-            var val = Assert.Throws<CensusAnalyserException>(() => csvstatecensus.LoadStateData(wrong_file_Extension));
+            var a = delegateInstance("CsvStateCensus");
+            var val = Assert.Throws<CensusAnalyserException>(() => a.LoadStateData(wrong_file_Extension, ',', Census_Data_header));
             Assert.AreEqual("Wrong_File_Extension", val.GetMessage);
         }
         /// <summary>
@@ -61,9 +65,10 @@ namespace NUnitTestProject1
         /// TestCase 1.4
         /// </summary>
         [Test]
-        public void WrongDelimeter()
+        public void WrongDelimeter_CsvStateCensus_StateCensusData()
         {
-            var val = Assert.Throws<CensusAnalyserException>(() => csvstatecensus.LoadStateData(state_census_path, '.'));
+            var a = delegateInstance("CsvStateCensus");
+            var val = Assert.Throws<CensusAnalyserException>(() => a.LoadStateData(state_census_path, '.', Census_Data_header));
             Assert.AreEqual("Wrong_Delimiter", val.GetMessage);
         }
         /// <summary>
@@ -71,21 +76,24 @@ namespace NUnitTestProject1
         /// TestCase 1.5
         /// </summary>
         [Test]
-        public void HeaderTest()
+        public void HeaderTest_CsvStateCensus_StateCensusData()
         {
-            var val = Assert.Throws<CensusAnalyserException>(() => csvstatecensus.LoadStateData(state_census_path, ',', "State,Phopulation,AreaInSqKm,DensityPerSqKm"));
+            var a = delegateInstance("CsvStateCensus");
+            var val = Assert.Throws<CensusAnalyserException>(() => a.LoadStateData(state_census_path, ',', "State,Phopulation,AreaInSqKm,DensityPerSqKm"));
             Assert.AreEqual("No_Header", val.GetMessage);
         }
         /// <summary>
-        /// TestCase 2.1
-        /// Records the compare count match.
+        /// Test Case 2.1 
+        /// Records the compare count match CSV state state code.
         /// </summary>
         [Test]
-        public void Record_Compare_Count_Match()
+        public void Record_Compare_Count_Match_CSVState_StateCode()
         {
-            int Census_data_record = stateanalyser.LoadStateCensusData(state_census_path);
-            int State_code_record = csvdlegate(state_code_path);
-            Assert.AreNotEqual(Census_data_record, State_code_record);
+            var a = delegateInstance("StateCensusAnalyser");
+            var b = delegateInstance("CSVState");
+            int actual = a.LoadStateData(state_code_path );
+            int expected = b.LoadStateData(state_code_path);
+            Assert.AreEqual(expected, actual);
         }
         /// <summary>
         /// TestCase 2.2
@@ -94,9 +102,9 @@ namespace NUnitTestProject1
         [Test]
         public void Wrong_File_Path_Compare_CSV_State()
         {
-            var csv_state_census = Assert.Throws<CensusAnalyserException>(() => csvstatecensus.LoadStateData(wrong_path));
-            var csv_state = Assert.Throws<CensusAnalyserException>(() => csvdlegate(wrong_path));
-            Assert.AreEqual(csv_state_census.GetMessage, csv_state.GetMessage);
+            var b = delegateInstance("CSVState");
+            var csv_state = Assert.Throws<CensusAnalyserException>(() => b.LoadStateData(wrong_path));
+            Assert.AreEqual("File_Not_Exist", csv_state.GetMessage);
         }
         /// <summary>
         /// TestCase 2.3
@@ -105,9 +113,9 @@ namespace NUnitTestProject1
         [Test]
         public void Wrong_File_Extension_Compare_CSV_State()
         {
-            var csv_state_census_Extension = Assert.Throws<CensusAnalyserException>(() => csvstatecensus.LoadStateData(wrong_file_Extension));
-            var csv_state_Code_Extension = Assert.Throws<CensusAnalyserException>(() => csvdlegate(State_Code_Extension));
-            Assert.AreEqual(csv_state_Code_Extension.GetMessage, csv_state_census_Extension.GetMessage);
+            var b = delegateInstance("CSVState");
+           var actual= Assert.Throws<CensusAnalyserException>(() => b.LoadStateData(State_Code_Extension));
+            Assert.AreEqual("Wrong_File_Extension",actual.GetMessage);
         }
         /// <summary>
         /// TestCase 2.4
@@ -116,9 +124,9 @@ namespace NUnitTestProject1
         [Test]
         public void Wrong_Delimiter_Compare_CSV_State()
         {
-            var csv_state_census_data_delimeter = Assert.Throws<CensusAnalyserException>(() => csvstatecensus.LoadStateData(state_census_path, '.'));
-            var state_code_data_delimeter = Assert.Throws<CensusAnalyserException>(() => csvdlegate(state_code_path, '.'));
-            Assert.AreEqual(csv_state_census_data_delimeter.GetMessage, state_code_data_delimeter.GetMessage);
+            var b = delegateInstance("CSVState");
+            var actual = Assert.Throws<CensusAnalyserException>(() => b.LoadStateData(state_code_path, '.'));
+            Assert.AreEqual("Wrong_Delimiter", actual.GetMessage);
         }
         /// <summary>
         /// TestCase 2.5
@@ -127,9 +135,9 @@ namespace NUnitTestProject1
         [Test]
         public void wrong_header_Compare_csv_state()
         {
-            var csv_state_census_Header = Assert.Throws<CensusAnalyserException>(() => csvstatecensus.LoadStateData(state_census_path, ',', "State,Phopulation,AreaInSqKm,DensityPerSqKm"));
-            var csv_state_Header = Assert.Throws<CensusAnalyserException>(() => csvdlegate(state_code_path, ',', "SrNo,State,Name"));
-            Assert.AreEqual(csv_state_census_Header.GetMessage, csv_state_Header.GetMessage);
+            var b = delegateInstance("CSVState");
+            var actual = Assert.Throws<CensusAnalyserException>(() =>b.LoadStateData(state_code_path, ',', "SrNo,State,Name"));
+            Assert.AreEqual("No_Header", actual.GetMessage);
         }
     }
 }
