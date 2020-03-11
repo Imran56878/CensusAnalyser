@@ -15,20 +15,13 @@ namespace CensusAnalyserTest
     public class StateCensusAnalyser :ICSVBuilder 
     {
         int totalRecord = 0;
-        public int LoadStateData(string path,char delimiter=',', string header = "State,Population,AreaInSqKm,DensityPerSqKm")
+        public int LoadStateData(string path,char delimiter, string header )
         {
-            try
-            {
-
                 string[] str = File.ReadAllLines(path);
                 totalRecord = str.Length;
                 return totalRecord;
-            }
-
-            catch (Exception)
-            {
-                throw;
-            }
+            
+            
         }
     }
 }

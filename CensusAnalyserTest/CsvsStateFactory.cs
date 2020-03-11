@@ -4,7 +4,7 @@ using System.Text;
 
 namespace CensusAnalyserTest
 {
-    public delegate ICSVBuilder  DelegateFactory(string message);
+    public delegate ICSVBuilder DelegateFactory(string message);
     public class CsvsStateFactory
     {
         public static ICSVBuilder GetInstance(string str)
@@ -18,7 +18,7 @@ namespace CensusAnalyserTest
             {
                 obj = new CSVState();
             }
-            else if(str == "StateCensusAnalyser")
+            else if (str == "StateCensusAnalyser")
             {
                 obj = new StateCensusAnalyser();
             }

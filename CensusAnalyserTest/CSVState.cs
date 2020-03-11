@@ -21,9 +21,7 @@ namespace CensusAnalyserTest
          int totalRecord = 0;
         public   int LoadStateData(string path, char delimiter = ',', string header = "SrNo,State,Name,TIN,StateCode")
         {
-            try
-            {
-                if (Path.GetExtension(path) != ".csv")
+              if (Path.GetExtension(path) != ".csv")
                 {
                     throw new CensusAnalyserException("Wrong_File_Extension");
                 }
@@ -55,12 +53,6 @@ namespace CensusAnalyserTest
                     totalRecord++;
                 }
                 return totalRecord;
-            }
-
-            catch (Exception)
-            {
-                throw;
-            }
         }
     }
 }

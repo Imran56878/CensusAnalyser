@@ -12,10 +12,9 @@ namespace CensusAnalyserTest
         /// To load csv data
         /// </summary>
          int totalRecord = 0;
-        public  int LoadStateData(string path, char delimiter = ',', string header = "State,Population,AreaInSqKm,DensityPerSqKm")
+        public  int LoadStateData(string path, char delimiter , string header )
         {
-            try
-            {
+           
                 if (Path.GetExtension(path) != ".csv")
                 {
                     throw new CensusAnalyserException("Wrong_File_Extension");
@@ -48,12 +47,7 @@ namespace CensusAnalyserTest
                     totalRecord++;
                 }
                 return totalRecord;
-            }
-
-            catch (Exception)
-            {
-                throw;
-            }
+            
         }
     }
 }
