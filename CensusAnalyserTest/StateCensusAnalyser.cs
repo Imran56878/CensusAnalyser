@@ -12,16 +12,16 @@ namespace CensusAnalyserTest
     /// This class is used for checking the record 
     /// or file path or given csv extension is not found  
     /// </summary>
-    public class StateCensusAnalyser :ICSVBuilder 
+    public class StateCensusAnalyser : ICSVBuilder
     {
         int totalRecord = 0;
-        public int LoadStateData(string path,char delimiter, string header )
+        public int LoadStateData(string path, char delimiter, string header)
         {
-                string[] str = File.ReadAllLines(path);
-                totalRecord = str.Length;
-                return totalRecord;
-            
-            
+            string[] str = File.ReadAllLines(path);
+            totalRecord = str.Length;
+            return totalRecord;
+
+
         }
     }
 }

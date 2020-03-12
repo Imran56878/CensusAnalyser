@@ -13,7 +13,7 @@ namespace CensusAnalyserTest
         {
             try
             {
-                value = isvr.LoadStateData( _path, _delimiter, _header);
+                value = isvr.LoadStateData(_path, _delimiter, _header);
             }
             catch (CensusAnalyserException e)
             {
