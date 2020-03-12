@@ -4,7 +4,6 @@ using System.Text;
 
 namespace CensusAnalyserTest
 {
-    public delegate ICSVBuilder DelegateFactory(string message);
     public class CsvsStateFactory
     {
         public static ICSVBuilder GetInstance(string str)
