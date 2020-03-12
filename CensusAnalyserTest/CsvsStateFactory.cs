@@ -4,8 +4,18 @@ using System.Text;
 
 namespace CensusAnalyserTest
 {
+    /// <summary>
+    /// Thbis class is used for creating an 
+    /// object to return it
+    /// to calling an object
+    /// </summary>
     public class CsvsStateFactory
     {
+        /// <summary>
+        /// Gets the instance.
+        /// </summary>
+        /// <param name="str">The string.</param>
+        /// <returns></returns>
         public static ICSVBuilder GetInstance(string str)
         {
             ICSVBuilder obj = null;

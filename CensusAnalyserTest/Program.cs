@@ -4,6 +4,12 @@ namespace CensusAnalyserTest
 {
     class Program
     {
+        /// <summary>
+        /// This class checks the 
+        /// test Case in console application
+        /// to check sum condition.
+        /// </summary>
+        /// <param name="args"></param>
         static void Main(string[] args)
         {
             Console.WriteLine("Welcome Census Analyser");
@@ -15,6 +21,8 @@ namespace CensusAnalyserTest
             Console.WriteLine("Total record in StateCode :" + b);
             int m = CsvBuilderDesign.BuilderMethod(new CSVState(), @"D:\Imran\CensusAnalyser\CensusAnalyserTest\CSVFile\StateCode.csv", ',', "SrNo,State,Name,TIN,StateCode");
             Console.WriteLine("Total record in StateCode by using builder class :" + m);
+            StateCensusAnalyser  sd = new StateCensusAnalyser();
+            sd.SortingCsVInJsonFile();
         }
     }
 }

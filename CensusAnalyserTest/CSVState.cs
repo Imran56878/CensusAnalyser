@@ -19,6 +19,22 @@ namespace CensusAnalyserTest
     public class CSVState : ICSVBuilder
     {
         int totalRecord = 0;
+        /// <summary>
+        /// Loads the state data.
+        /// </summary>
+        /// <param name="path">The path.</param>
+        /// <param name="delimiter">The delimiter.</param>
+        /// <param name="header">The header.</param>
+        /// <returns></returns>
+        /// <exception cref="CensusAnalyserException">
+        /// Wrong_File_Extension
+        /// or
+        /// File_Not_Exist
+        /// or
+        /// Wrong_Delimiter
+        /// or
+        /// No_Header
+        /// </exception>
         public int LoadStateData(string path, char delimiter, string header)
         {
             if (Path.GetExtension(path) != ".csv")

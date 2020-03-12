@@ -5,6 +5,10 @@ using System.Text;
 
 namespace CensusAnalyserTest
 {
+    /// <summary>
+    /// Load StateCensusData csv file
+    /// </summary>
+    /// <seealso cref="CensusAnalyserTest.ICSVBuilder" />
     public class CsvStateCensus : ICSVBuilder
     {
         /// <summary>
@@ -12,6 +16,22 @@ namespace CensusAnalyserTest
         /// To load csv data
         /// </summary>
         int totalRecord = 0;
+        /// <summary>
+        /// Loads the state data.
+        /// </summary>
+        /// <param name="path">The path.</param>
+        /// <param name="delimiter">The delimiter.</param>
+        /// <param name="header">The header.</param>
+        /// <returns></returns>
+        /// <exception cref="CensusAnalyserException">
+        /// Wrong_File_Extension
+        /// or
+        /// File_Not_Exist
+        /// or
+        /// Wrong_Delimiter
+        /// or
+        /// No_Header
+        /// </exception>
         public int LoadStateData(string path, char delimiter, string header)
         {
 
