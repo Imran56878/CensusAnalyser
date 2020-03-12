@@ -11,7 +11,7 @@ namespace CensusAnalyserTest
             StateCensusAnalyser at = new StateCensusAnalyser();
             int a = at.LoadStateData(path, ',', "State,Population,AreaInSqKm,DensityPerSqKm");
             Console.WriteLine("Total record in StateCensusData :" + a);
-            int b = new CSVState().LoadStateData(@"D:\Imran\CensusAnalyser\CensusAnalyserTest\CSVFile\StateCode.csv");
+            int b = new CSVState().LoadStateData(@"D:\Imran\CensusAnalyser\CensusAnalyserTest\CSVFile\StateCode.csv", ',', "SrNo,State,Name,TIN,StateCode");
             Console.WriteLine("Total record in StateCode :" + b);
             int m = CsvBuilderDesign.BuilderMethod(new CSVState(), @"D:\Imran\CensusAnalyser\CensusAnalyserTest\CSVFile\StateCode.csv", ',', "SrNo,State,Name,TIN,StateCode");
             Console.WriteLine("Total record in StateCode by using builder class :" + m);

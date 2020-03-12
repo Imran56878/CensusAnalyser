@@ -6,6 +6,6 @@ namespace CensusAnalyserTest
 {
     public interface ICSVBuilder
     {
-        public int LoadStateData(string path, char delimiter , string header );
+        public int LoadStateData(string path, char delimiter, string header);
     }
 }

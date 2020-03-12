@@ -12,14 +12,14 @@ namespace CensusAnalyserTest
     /// <param name="delimiter"></param>
     /// <param name="header"></param>
     /// <returns></returns>
-    public delegate int CsvStateDelegat(string path, char delimiter = ',', string header = "SrNo,State,Name,TIN,StateCode");
+    public delegate int CsvStateDelegat(string path, char delimiter, string header);
     /// <summary>
     /// It read StateCode csv file .
     /// </summary>
     public class CSVState : ICSVBuilder
     {
         int totalRecord = 0;
-        public int LoadStateData(string path, char delimiter = ',', string header = "SrNo,State,Name,TIN,StateCode")
+        public int LoadStateData(string path, char delimiter, string header)
         {
             if (Path.GetExtension(path) != ".csv")
             {
