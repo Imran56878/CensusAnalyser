@@ -61,12 +61,30 @@ namespace CensusAnalyserTest
             File.WriteAllText(@"D:\Imran\CensusAnalyser\CensusAnalyserTest\SortedStateCensus.json", sb.ToString());
 
         }
+        /// <summary>
+        /// Accesses the key value.
+        /// </summary>
+        /// <param name="_index">The index.</param>
+        /// <param name="name">The name.</param>
+        /// <param name="_path">The path.</param>
+        /// <returns></returns>
         public string Access_Key_Value(int _index, string name, string _path)
         {
             var mj = File.ReadAllText(_path);
             JArray a = JArray.Parse(mj);
             var value = a[_index][name];
             return value.ToString(); ;
+        }
+        /// <summary>
+        /// Jsons the file count.
+        /// </summary>
+        /// <param name="_json_file_path">The json file path.</param>
+        /// <returns></returns>
+        public int Json_file_count(string _json_file_path)
+        {
+            var mj = File.ReadAllText(_json_file_path);
+            JArray a = JArray.Parse(mj);
+            return a.Count;
         }
     }
 }

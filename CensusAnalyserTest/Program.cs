@@ -24,10 +24,10 @@ namespace CensusAnalyserTest
             int b = new CSVState().LoadStateData(@"D:\Imran\CensusAnalyser\CensusAnalyserTest\CSVFile\StateCode.csv", ',', "SrNo,State,Name,TIN,StateCode");
             Console.WriteLine("Total record in StateCode :" + b);
             int m = CsvBuilderDesign.BuilderMethod(new CSVState(), @"D:\Imran\CensusAnalyser\CensusAnalyserTest\CSVFile\StateCode.csv", ',', "SrNo,State,Name,TIN,StateCode");
-            Console.WriteLine("Total record in StateCode by using builder class :" + m); 
+            Console.WriteLine("Total record in StateCode by using builder class :" + m);
             StateCensusAnalyser sd = new StateCensusAnalyser();
             sd.SortingCsVInJsonFile();
-            Console.WriteLine("End");
+            
 
         }
     }
