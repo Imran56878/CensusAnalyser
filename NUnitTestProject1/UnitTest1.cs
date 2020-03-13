@@ -16,6 +16,11 @@ namespace NUnitTestProject1
         string State_Code_Extension = @"D:\Imran\CensusAnalyser\CensusAnalyserTest\CSVFile\StateCode.csev";
         string Census_Data_header = "State,Population,AreaInSqKm,DensityPerSqKm";
         string State_code_header = "SrNo,State,Name,TIN,StateCode";
+        string sorted_census_csv = @"D:\Imran\CensusAnalyser\CensusAnalyserTest\CSVFile\SortedStateCensusData.csv";
+        string json_census = @"D:\Imran\CensusAnalyser\CensusAnalyserTest\SortedStateCensus.json";
+        string sorted_state_ = @"D:\Imran\CensusAnalyser\CensusAnalyserTest\CSVFile\SortedStateCodeData.csv";
+        string json_state_data = @"D:\Imran\CensusAnalyser\CensusAnalyserTest\SortedState_code.json";
+        StateCensusAnalyser stateanalyser = new StateCensusAnalyser();
         DelegateBuilderMethod delegatebulder = new DelegateBuilderMethod(CsvBuilderDesign.BuilderMethod);
 
         [SetUp]
@@ -144,7 +149,6 @@ namespace NUnitTestProject1
         [Test]
         public void Csv_state_census_firstState()
         {
-            StateCensusAnalyser stateanalyser = new StateCensusAnalyser();
             stateanalyser.SortingCsVInJsonFile();
             var value = stateanalyser.Access_Key_Value(0, "State", @"D:\Imran\CensusAnalyser\CensusAnalyserTest\SortedStateCensus.json");
             Assert.AreEqual("Andhra Pradesh", value);
@@ -155,11 +159,12 @@ namespace NUnitTestProject1
         [Test]
         public void Csv_state_census_lastState()
         {
-            StateCensusAnalyser stateanalyser = new StateCensusAnalyser();
             var obj1 = CsvsStateFactory.GetInstance("StateCensusAnalyser");
             stateanalyser.SortingCsVInJsonFile();
-            var value = stateanalyser.Access_Key_Value(28, "State", @"D:\Imran\CensusAnalyser\CensusAnalyserTest\SortedStateCensus.json");
+            int a = stateanalyser.Json_file_count(json_census);
+            var value = stateanalyser.Access_Key_Value(a-1, "State", @"D:\Imran\CensusAnalyser\CensusAnalyserTest\SortedStateCensus.json");
             Assert.AreEqual("West Bengal", value);
+
         }
     }
 }
