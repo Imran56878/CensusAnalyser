@@ -7,6 +7,7 @@ using System.Text;
 using Microsoft.VisualBasic.FileIO;
 using ChoETL;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace CensusAnalyserTest
 {
@@ -59,6 +60,13 @@ namespace CensusAnalyserTest
             }
             File.WriteAllText(@"D:\Imran\CensusAnalyser\CensusAnalyserTest\SortedStateCensus.json", sb.ToString());
 
+        }
+        public string Access_Key_Value(int _index, string name, string _path)
+        {
+            var mj = File.ReadAllText(_path);
+            JArray a = JArray.Parse(mj);
+            var value = a[_index][name];
+            return value.ToString(); ;
         }
     }
 }
