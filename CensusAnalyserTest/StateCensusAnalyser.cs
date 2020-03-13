@@ -16,7 +16,7 @@ namespace CensusAnalyserTest
     /// </summary>
     public class StateCensusAnalyser : ICSVBuilder
     {
-        string state_census_path = @"D:\Imran\CensusAnalyser\CensusAnalyserTest\CSVFile\StateCensusData.csv";
+        string state_census_path = @"D:\Imran\CensusAnalyser\CensusAnalyserTest\CSVFile\SortedStateCensusData.csv";
         int totalRecord = 0;
         /// <summary>
         /// Loads the state data.
