@@ -138,5 +138,28 @@ namespace NUnitTestProject1
             var actual = Assert.Throws<CensusAnalyserException>(() => delegatebulder(obj, state_code_path, ',', "SrNo,State,Name"));
             Assert.AreEqual("No_Header", actual.GetMessage);
         }
+        /// <summary>
+        /// CSVs the first state of the state census code data.
+        /// </summary>
+        [Test]
+        public void Csv_state_census_firstState()
+        {
+            StateCensusAnalyser stateanalyser = new StateCensusAnalyser();
+            stateanalyser.SortingCsVInJsonFile();
+            var value = stateanalyser.Access_Key_Value(0, "State", @"D:\Imran\CensusAnalyser\CensusAnalyserTest\SortedStateCensus.json");
+            Assert.AreEqual("Andhra Pradesh", value);
+        }
+        /// <summary>
+        /// CSVs the last state of the state census code data .
+        /// </summary>
+        [Test]
+        public void Csv_state_census_lastState()
+        {
+            StateCensusAnalyser stateanalyser = new StateCensusAnalyser();
+            var obj1 = CsvsStateFactory.GetInstance("StateCensusAnalyser");
+            stateanalyser.SortingCsVInJsonFile();
+            var value = stateanalyser.Access_Key_Value(28, "State", @"D:\Imran\CensusAnalyser\CensusAnalyserTest\SortedStateCensus.json");
+            Assert.AreEqual("West Bengal", value);
+        }
     }
 }
