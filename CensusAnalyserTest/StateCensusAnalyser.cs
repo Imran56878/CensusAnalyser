@@ -34,19 +34,30 @@ namespace CensusAnalyserTest
 
         }
         /// <summary>
-        /// Sortings the csv in json file.
+        /// first it will sort the data
+        /// and then convert it to
+        /// Sorted  json file.
         /// </summary>
         public void SortingCsVInJsonFile()
         {
-            var lines = File.ReadAllText(state_census_path);
+            string[] lines = File.ReadAllLines(@"D:\Imran\CensusAnalyser\CensusAnalyserTest\CSVFile\StateCensusData.csv");
+            List<string> amn = new List<string>();
+
+            for (int i = 1; i < lines.Length; i++)
+            {
+                amn.Add(lines[i]);
+
+            }
+            amn.Sort();
+            amn.Insert(0, lines[0]);
+            File.WriteAllLines(@"D:\Imran\CensusAnalyser\CensusAnalyserTest\CSVFile\SortedStateCensusData.csv", amn);
+            var textline = File.ReadAllText(state_census_path);
             StringBuilder sb = new StringBuilder();
-            using (var p = ChoCSVReader.LoadText(lines).WithFirstLineHeader())
+            using (var p = ChoCSVReader.LoadText(textline).WithFirstLineHeader())
             {
                 using (var w = new ChoJSONWriter(sb)) w.Write(p);
             }
-            File.WriteAllText(@"D:\Imran\CensusAnalyser\CensusAnalyserTest\jsconfig1.json", sb.ToString());
-
-            Console.WriteLine(sb.ToString());
+            File.WriteAllText(@"D:\Imran\CensusAnalyser\CensusAnalyserTest\SortedStateCensus.json", sb.ToString());
 
         }
     }
