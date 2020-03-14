@@ -39,9 +39,9 @@ namespace CensusAnalyserTest
         /// and then convert it to
         /// Sorted  json file.
         /// </summary>
-        public void SortingCsVInJsonFile()
+        public void Sorting_CsV_File(string _read_csv_path, string _write_csv_path)
         {
-            string[] lines = File.ReadAllLines(@"D:\Imran\CensusAnalyser\CensusAnalyserTest\CSVFile\StateCensusData.csv");
+            string[] lines = File.ReadAllLines(_read_csv_path );
             List<string> amn = new List<string>();
 
             for (int i = 1; i < lines.Length; i++)
@@ -51,14 +51,30 @@ namespace CensusAnalyserTest
             }
             amn.Sort();
             amn.Insert(0, lines[0]);
-            File.WriteAllLines(@"D:\Imran\CensusAnalyser\CensusAnalyserTest\CSVFile\SortedStateCensusData.csv", amn);
-            var textline = File.ReadAllText(state_census_path);
+            File.WriteAllLines(_write_csv_path , amn);
+            /*var textline = File.ReadAllText(state_census_path);
             StringBuilder sb = new StringBuilder();
             using (var p = ChoCSVReader.LoadText(textline).WithFirstLineHeader())
             {
                 using (var w = new ChoJSONWriter(sb)) w.Write(p);
             }
-            File.WriteAllText(@"D:\Imran\CensusAnalyser\CensusAnalyserTest\SortedStateCensus.json", sb.ToString());
+            File.WriteAllText(@"D:\Imran\CensusAnalyser\CensusAnalyserTest\SortedStateCensus.json", sb.ToString());*/
+
+        }
+        /// <summary>
+        /// Writes the CSV to JSV.
+        /// </summary>
+        /// <param name="_readcsv_path">The readcsv path.</param>
+        /// <param name="_write_json_path">The write json path.</param>
+        public void Write_Csv_to_json(string _readcsv_path, string _write_json_path)
+        {
+            var textline = File.ReadAllText(_readcsv_path );
+            StringBuilder sb = new StringBuilder();
+            using (var p = ChoCSVReader.LoadText(textline).WithFirstLineHeader())
+            {
+                using (var w = new ChoJSONWriter(sb)) w.Write(p);
+            }
+            File.WriteAllText(_write_json_path , sb.ToString());
 
         }
         /// <summary>
