@@ -97,7 +97,7 @@ namespace NUnitTestProject1
             var obj2 = CsvsStateFactory.GetInstance("CSVState");
             int actual = delegatebulder(obj1, state_code_path, ',', State_code_header);
             int expected = delegatebulder(obj2, state_code_path, ',', State_code_header);
-            Assert.AreEqual(expected, actual-1);
+            Assert.AreEqual(expected, actual);
         }
         /// <summary>
         /// TestCase 2.2
