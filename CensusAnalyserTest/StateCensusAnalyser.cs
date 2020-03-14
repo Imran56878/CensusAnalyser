@@ -16,8 +16,7 @@ namespace CensusAnalyserTest
     /// or file path or given csv extension is not found  
     /// </summary>
     public class StateCensusAnalyser : ICSVBuilder
-    {
-        string state_census_path = @"D:\Imran\CensusAnalyser\CensusAnalyserTest\CSVFile\SortedStateCensusData.csv";
+    {  
         int totalRecord = 0;
         /// <summary>
         /// Loads the state data.
@@ -51,15 +50,7 @@ namespace CensusAnalyserTest
             }
             amn.Sort();
             amn.Insert(0, lines[0]);
-            File.WriteAllLines(_write_csv_path , amn);
-            /*var textline = File.ReadAllText(state_census_path);
-            StringBuilder sb = new StringBuilder();
-            using (var p = ChoCSVReader.LoadText(textline).WithFirstLineHeader())
-            {
-                using (var w = new ChoJSONWriter(sb)) w.Write(p);
-            }
-            File.WriteAllText(@"D:\Imran\CensusAnalyser\CensusAnalyserTest\SortedStateCensus.json", sb.ToString());*/
-
+            File.WriteAllLines(_write_csv_path , amn);  
         }
         /// <summary>
         /// Writes the CSV to JSV.
