@@ -25,9 +25,11 @@ namespace CensusAnalyserTest
              Console.WriteLine("Total record in StateCode :" + b);
              int m = CsvBuilderDesign.BuilderMethod(new CSVState(), @"D:\Imran\CensusAnalyser\CensusAnalyserTest\CSVFile\StateCode.csv", ',', "SrNo,State,Name,TIN,StateCode");
              Console.WriteLine("Total record in StateCode by using builder class :" + m);*/
-            CSVState st = new CSVState();
+            /*CSVState st = new CSVState();
             int s = st.LoadStateData(@"D:\Imran\CensusAnalyser\CensusAnalyserTest\CSVFile\StateCensusData.csv", ',', "State,Population,AreaInSqKm,DensityPerSqKm");
-            Console.WriteLine("Count is :" + s);
+            Console.WriteLine("Count is :" + s);*/
+            StateCensusAnalyser st = new StateCensusAnalyser();
+            st.SortJson_File("DensityPerSqKm", @"D:\Imran\CensusAnalyser\CensusAnalyserTest\SortedStateCensus.json");
         }
     }
 }

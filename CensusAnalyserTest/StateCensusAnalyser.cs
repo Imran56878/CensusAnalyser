@@ -93,5 +93,29 @@ namespace CensusAnalyserTest
             JArray a = JArray.Parse(mj);
             return a.Count;
         }
+        public void SortJson_File(string name, string _path)
+        {
+            var mj = File.ReadAllText(_path);
+            JArray a = JArray.Parse(mj);
+            for (int i=0; i<a.Count; i++ )
+            {
+               
+                for (int j = 0; j < a.Count - 1; j++)
+                {
+                    var value = a[i][name].CastTo<int>();
+                    var value1 = a[j][name].CastTo<int>();
+                    if (value > value1)
+                    {
+                        var temp = a[i];
+                        a[i] = a[j];
+                        a[j] = temp;
+                    }
+                }  
+                
+            }
+            File.WriteAllText(@"D:\Imran\CensusAnalyser\CensusAnalyserTest\SortedStateCensus11.json", a.ToString());
+            //Console.WriteLine(a);
+            
+        }
     }
 }
