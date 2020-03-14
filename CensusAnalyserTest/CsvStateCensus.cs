@@ -57,19 +57,25 @@ namespace CensusAnalyserTest
             {
                 throw new CensusAnalyserException("No_Header");
             }
-            ///<summary>
-            ///  It will add
-            ///  the csv file 
-            ///  in list
-            ///</summary>>
-            var l = new List<string>();
-            foreach (string line in str)
+            string[] str1 = str[0].Split(',');
+            // Here we are creating a Dictionay of string type key and
+            // Dictionary type value
+            var map = new Dictionary<int, Dictionary<string, string>>();
+            int key = 1;
+            for (int j = 1; j < str.Length; j++)
             {
-                l.Add(line);
+                string[] mstr = str[j].Split(',');
+                Dictionary<string, string> dic = new Dictionary<string, string>();
+                //  Here we are creating a local Dictionay of string
+                //  type key and string type value
+                dic.Add(str1[0], mstr[0]); // str1[0]=>State and mstr[0]=>It's value
+                dic.Add(str1[1], mstr[1]); // str1[1]=>Population and mstr[0]=>It's value
+                dic.Add(str1[2], mstr[2]); // str1[2]=>AreaInSqKm and mstr[0]=>It's value
+                dic.Add(str1[3], mstr[3]); // str1[3]=>DensityPerSqKm and mstr[0]=>It's value
+                map.Add(key, dic);
+                key++;
             }
-            totalRecord = l.Count;
-            return totalRecord;
-
+            return map.Count;
         }
     }
 }

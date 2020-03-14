@@ -18,7 +18,6 @@ namespace CensusAnalyserTest
     /// </summary>
     public class CSVState : ICSVBuilder
     {
-        int totalRecord = 0;
         /// <summary>
         /// Loads the state data.
         /// </summary>
@@ -77,18 +76,7 @@ namespace CensusAnalyserTest
                 map.Add(key, dic);
                 key++;
             }
-            ///<summary>
-            ///  It will add 
-            ///  the csv file
-            ///  in list
-            ///</summary>>
-            var l = new List<string>();
-            foreach (string line in str)
-            {
-                l.Add(line);
-            }
-            totalRecord = l.Count;
-            return map.Count; ;
+            return map.Count; 
         }
     }
 }

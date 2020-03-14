@@ -29,8 +29,8 @@ namespace CensusAnalyserTest
         {
             string[] str = File.ReadAllLines(path);
             totalRecord = str.Length;
-            return totalRecord;
-
+            //  To ignore header lines count -1 is added.
+            return totalRecord-1;
 
         }
         /// <summary>
