@@ -19,7 +19,7 @@ namespace NUnitTestProject1
         string sorted_census_csv = @"D:\Imran\CensusAnalyser\CensusAnalyserTest\CSVFile\SortedStateCensusData.csv";
         string json_census = @"D:\Imran\CensusAnalyser\CensusAnalyserTest\SortedStateCensus.json";
         string sorted_state_ = @"D:\Imran\CensusAnalyser\CensusAnalyserTest\CSVFile\SortedStateCodeData.csv";
-        string json_state_data = @"D:\Imran\CensusAnalyser\CensusAnalyserTest\SortedState_code.json";
+        string json_state_data = @"D:\Imran\CensusAnalyser\CensusAnalyserTest\SortedStateCode.json";
         StateCensusAnalyser stateanalyser = new StateCensusAnalyser();
         DelegateBuilderMethod delegatebulder = new DelegateBuilderMethod(CsvBuilderDesign.BuilderMethod);
 
@@ -97,7 +97,7 @@ namespace NUnitTestProject1
             var obj2 = CsvsStateFactory.GetInstance("CSVState");
             int actual = delegatebulder(obj1, state_code_path, ',', State_code_header);
             int expected = delegatebulder(obj2, state_code_path, ',', State_code_header);
-            Assert.AreEqual(expected, actual);
+            Assert.AreEqual(expected, actual-1);
         }
         /// <summary>
         /// TestCase 2.2
