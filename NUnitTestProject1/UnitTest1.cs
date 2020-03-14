@@ -15,7 +15,7 @@ namespace NUnitTestProject1
         string wrong_file_Extension = @"D:\Imran\CensusAnalyser\CensusAnalyserTest\CSVFile\StateCensusData.csveg";
         string State_Code_Extension = @"D:\Imran\CensusAnalyser\CensusAnalyserTest\CSVFile\StateCode.csev";
         string Census_Data_header = "State,Population,AreaInSqKm,DensityPerSqKm";
-        string State_code_header = "SrNo,State,Name,TIN,StateCode";
+        string State_code_header = "SrNo,State Name,TIN,StateCode";
         string sorted_census_csv = @"D:\Imran\CensusAnalyser\CensusAnalyserTest\CSVFile\SortedStateCensusData.csv";
         string json_census = @"D:\Imran\CensusAnalyser\CensusAnalyserTest\SortedStateCensus.json";
         string sorted_state_ = @"D:\Imran\CensusAnalyser\CensusAnalyserTest\CSVFile\SortedStateCodeData.csv";
@@ -144,27 +144,52 @@ namespace NUnitTestProject1
             Assert.AreEqual("No_Header", actual.GetMessage);
         }
         /// <summary>
-        /// CSVs the first state of the state census code data.
+        /// It checks the first state
+        /// of the state census code data.
         /// </summary>
         [Test]
         public void Csv_state_census_firstState()
         {
-            stateanalyser.SortingCsVInJsonFile();
-            var value = stateanalyser.Access_Key_Value(0, "State", @"D:\Imran\CensusAnalyser\CensusAnalyserTest\SortedStateCensus.json");
+            stateanalyser.Sorting_CsV_File(state_census_path, sorted_census_csv);
+            stateanalyser.Write_Csv_to_json(sorted_census_csv, json_census);
+            var value = stateanalyser.Access_Key_Value(0, "State", json_census);
             Assert.AreEqual("Andhra Pradesh", value);
         }
         /// <summary>
-        /// CSVs the last state of the state census code data .
+        /// It checks the last state 
+        /// of the state census code data .
         /// </summary>
         [Test]
         public void Csv_state_census_lastState()
         {
-            var obj1 = CsvsStateFactory.GetInstance("StateCensusAnalyser");
-            stateanalyser.SortingCsVInJsonFile();
+            stateanalyser.Sorting_CsV_File(state_census_path, sorted_census_csv);
+            stateanalyser.Write_Csv_to_json(sorted_census_csv, json_census);
             int a = stateanalyser.Json_file_count(json_census);
-            var value = stateanalyser.Access_Key_Value(a-1, "State", @"D:\Imran\CensusAnalyser\CensusAnalyserTest\SortedStateCensus.json");
+            var value = stateanalyser.Access_Key_Value(a - 1, "State", json_census);
             Assert.AreEqual("West Bengal", value);
-
+        }
+        /// <summary>
+        /// It cheks the first state of State Code json file
+        /// and check it .
+        /// </summary>
+        [Test]
+        public void State_Code_Json_First_State()
+        {
+            stateanalyser.Write_Csv_to_json(state_code_path, json_state_data);
+            var value = stateanalyser.Access_Key_Value(0, "State Name", json_state_data);
+            Assert.AreEqual("Andaman and Nicobar Islands", value);
+        }
+        /// <summary>
+        /// It check the last state of 
+        /// state code json file .
+        /// </summary>
+        [Test]
+        public void State_Code_Json_Last_State()
+        {
+            stateanalyser.Write_Csv_to_json(state_code_path, json_state_data);
+            int a = stateanalyser.Json_file_count(json_state_data);
+            var value = stateanalyser.Access_Key_Value(a - 1, "State Name", json_state_data);
+            Assert.AreEqual("West Bengal", value);
         }
     }
 }
