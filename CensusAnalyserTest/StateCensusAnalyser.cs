@@ -93,6 +93,12 @@ namespace CensusAnalyserTest
             JArray a = JArray.Parse(mj);
             return a.Count;
         }
+        /// <summary>
+        /// Sorts the json file
+        /// in any order 
+        /// </summary>
+        /// <param name="name">The name.</param>
+        /// <param name="_path">The path.</param>
         public void SortJson_File(string name, string _path)
         {
             var mj = File.ReadAllText(_path);

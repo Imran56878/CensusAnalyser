@@ -49,7 +49,7 @@ namespace CensusAnalyserTest
             foreach (string line in str)
             {
                 string[] csvline = line.Split(delimiter);
-                if (csvline.Length != 4 && csvline.Length != 5)
+                if (csvline.Length != 4 && csvline.Length != 5 && csvline.Length != 2)
                 {
                     throw new CensusAnalyserException("Wrong_Delimiter");
                 }
