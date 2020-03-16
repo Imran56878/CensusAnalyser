@@ -29,60 +29,60 @@ namespace NUnitTestProject1
         }
         /// <summary>
         /// States the census analyser test record.
-        /// It will check the total record  .
+        /// It will check the total record in StateCensusDta csv file  .
         /// TestCase1.1
         /// </summary>
         [Test]
         public void StateCensusAnalyserTestRecord()
         {
             var obj1 = CsvsStateFactory.GetInstance("StateCensusAnalyser");
-            var obj2 = CsvsStateFactory.GetInstance("CsvStateCensus");
+            var obj2 = CsvsStateFactory.GetInstance("CSVState");
             int expected = delegatebulder(obj1, state_census_path, ',', Census_Data_header);
             int actual = delegatebulder(obj2, state_census_path, ',', Census_Data_header);
             Assert.AreEqual(expected, actual);
         }
         /// <summary>
-        /// Wrongs the file path.
+        /// Wrongs the file path in StateCensusDta csv file .
         /// file is not Exist
         /// TestCase1.2
         /// </summary>
         [Test]
-        public void WrongFilePath_CsvStateCensus_StateCensusData()
+        public void WrongFilePath_CsvState_StateCensusData()
         {
-            var obj = CsvsStateFactory.GetInstance("CsvStateCensus");
+            var obj = CsvsStateFactory.GetInstance("CSVState");
             var val = Assert.Throws<CensusAnalyserException>(() => delegatebulder(obj, wrong_path, ',', Census_Data_header));
             Assert.AreEqual("File_Not_Exist", val.GetMessage);
         }
         /// <summary>
-        /// Wrongs the file extension.
+        /// Wrongs the file extension in StateCensusDta csv file .
         /// TestCase 1.3
         /// </summary>
         [Test]
-        public void WrongFileExtension_CsvStateCensus_StateCensusData()
+        public void WrongFileExtension_CsvState_StateCensusData()
         {
-            var obj = CsvsStateFactory.GetInstance("CsvStateCensus");
+            var obj = CsvsStateFactory.GetInstance("CSVState");
             var val = Assert.Throws<CensusAnalyserException>(() => delegatebulder(obj, wrong_file_Extension, ',', Census_Data_header));
             Assert.AreEqual("Wrong_File_Extension", val.GetMessage);
         }
         /// <summary>
-        /// Wrongs the delimeter.
+        /// Wrongs the delimeter in StateCensusDta csv file .
         /// TestCase 1.4
         /// </summary>
         [Test]
-        public void WrongDelimeter_CsvStateCensus_StateCensusData()
+        public void WrongDelimeter_CsvState_StateCensusData()
         {
-            var obj = CsvsStateFactory.GetInstance("CsvStateCensus");
+            var obj = CsvsStateFactory.GetInstance("CSVState");
             var val = Assert.Throws<CensusAnalyserException>(() => delegatebulder(obj, state_census_path, '.', Census_Data_header));
             Assert.AreEqual("Wrong_Delimiter", val.GetMessage);
         }
         /// <summary>
-        /// Headers the test.
+        /// Headers the test in StateCensusDta csv file .
         /// TestCase 1.5
         /// </summary>
         [Test]
-        public void WrongHeader_CsvStateCensus_StateCensusData()
+        public void WrongHeader_CsvState_StateCensusData()
         {
-            var obj = CsvsStateFactory.GetInstance("CsvStateCensus");
+            var obj = CsvsStateFactory.GetInstance("CSVState");
             var val = Assert.Throws<CensusAnalyserException>(() => delegatebulder(obj, state_census_path, ',', "State,Phopulation,AreaInSqKm,DensityPerSqKm"));
             Assert.AreEqual("No_Header", val.GetMessage);
         }
