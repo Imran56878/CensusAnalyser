@@ -99,9 +99,10 @@ namespace CensusAnalyserTest
         /// </summary>
         /// <param name="name">The name.</param>
         /// <param name="_path">The path.</param>
-        public void SortJson_File(string name, string _path)
+        public int SortJson_File(string name, string read_path, string write_path)
         {
-            var mj = File.ReadAllText(_path);
+            int count = 0;
+            var mj = File.ReadAllText(read_path);
             JArray a = JArray.Parse(mj);
             for (int i=0; i<a.Count; i++ )
             {
@@ -112,6 +113,7 @@ namespace CensusAnalyserTest
                     var value1 = a[j][name].CastTo<int>();
                     if (value > value1)
                     {
+                        count++;
                         var temp = a[i];
                         a[i] = a[j];
                         a[j] = temp;
@@ -119,8 +121,8 @@ namespace CensusAnalyserTest
                 }  
                 
             }
-            File.WriteAllText(@"D:\Imran\CensusAnalyser\CensusAnalyserTest\SortedStateCensus11.json", a.ToString());
-            //Console.WriteLine(a);
+            File.WriteAllText(write_path , a.ToString());
+            return count;
             
         }
     }
