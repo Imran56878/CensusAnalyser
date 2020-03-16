@@ -20,6 +20,7 @@ namespace NUnitTestProject1
         string json_census = @"D:\Imran\CensusAnalyser\CensusAnalyserTest\SortedStateCensus.json";
         string sorted_state_ = @"D:\Imran\CensusAnalyser\CensusAnalyserTest\CSVFile\SortedStateCodeData.csv";
         string json_state_data = @"D:\Imran\CensusAnalyser\CensusAnalyserTest\SortedStateCode.json";
+        string json_path = @"D:\Imran\CensusAnalyser\CensusAnalyserTest\SortedStateCensusInPopulation.json";
         StateCensusAnalyser stateanalyser = new StateCensusAnalyser();
         DelegateBuilderMethod delegatebulder = new DelegateBuilderMethod(CsvBuilderDesign.BuilderMethod);
 
@@ -30,7 +31,7 @@ namespace NUnitTestProject1
         /// <summary>
         /// States the census analyser test record.
         /// It will check the total record in StateCensusDta csv file  .
-        /// TestCase1.1
+        /// TestCase1.1 Refactor7
         /// </summary>
         [Test]
         public void StateCensusAnalyserTestRecord()
@@ -44,7 +45,7 @@ namespace NUnitTestProject1
         /// <summary>
         /// Wrongs the file path in StateCensusDta csv file .
         /// file is not Exist
-        /// TestCase1.2
+        /// TestCase1.2 Refactor7
         /// </summary>
         [Test]
         public void WrongFilePath_CsvState_StateCensusData()
@@ -55,7 +56,7 @@ namespace NUnitTestProject1
         }
         /// <summary>
         /// Wrongs the file extension in StateCensusDta csv file .
-        /// TestCase 1.3
+        /// TestCase 1.3  Refactor7
         /// </summary>
         [Test]
         public void WrongFileExtension_CsvState_StateCensusData()
@@ -66,7 +67,7 @@ namespace NUnitTestProject1
         }
         /// <summary>
         /// Wrongs the delimeter in StateCensusDta csv file .
-        /// TestCase 1.4
+        /// TestCase 1.4   Refactor7
         /// </summary>
         [Test]
         public void WrongDelimeter_CsvState_StateCensusData()
@@ -77,7 +78,7 @@ namespace NUnitTestProject1
         }
         /// <summary>
         /// Headers the test in StateCensusDta csv file .
-        /// TestCase 1.5
+        /// TestCase 1.5  Refactor7
         /// </summary>
         [Test]
         public void WrongHeader_CsvState_StateCensusData()
@@ -87,7 +88,7 @@ namespace NUnitTestProject1
             Assert.AreEqual("No_Header", val.GetMessage);
         }
         /// <summary>
-        /// Test Case 2.1 
+        /// Test Case 2.1 Refactor7
         /// Records the compare count match CSV state state code.
         /// </summary>
         [Test]
@@ -100,7 +101,7 @@ namespace NUnitTestProject1
             Assert.AreEqual(expected, actual);
         }
         /// <summary>
-        /// TestCase 2.2
+        /// TestCase 2.2 Refactor7
         /// Wrongs the state of the file path compare CSV.
         /// </summary>
         [Test]
@@ -111,7 +112,7 @@ namespace NUnitTestProject1
             Assert.AreEqual("File_Not_Exist", csv_state.GetMessage);
         }
         /// <summary>
-        /// TestCase 2.3
+        /// TestCase 2.3  Refactor7
         /// Wrongs the state of the file extension compare CSV.
         /// </summary>
         [Test]
@@ -122,7 +123,7 @@ namespace NUnitTestProject1
             Assert.AreEqual("Wrong_File_Extension", actual.GetMessage);
         }
         /// <summary>
-        /// TestCase 2.4
+        /// TestCase 2.4  Refactor7
         /// Wrongs the state of the delimiter compare CSV.
         /// </summary>
         [Test]
@@ -133,7 +134,7 @@ namespace NUnitTestProject1
             Assert.AreEqual("Wrong_Delimiter", actual.GetMessage);
         }
         /// <summary>
-        /// TestCase 2.5
+        /// TestCase 2.5  Refactor7
         /// Wrongs the state of the header compare CSV.
         /// </summary>
         [Test]
@@ -144,6 +145,7 @@ namespace NUnitTestProject1
             Assert.AreEqual("No_Header", actual.GetMessage);
         }
         /// <summary>
+        /// UseCase4
         /// It checks the first state
         /// of the state census code data.
         /// </summary>
@@ -156,40 +158,50 @@ namespace NUnitTestProject1
             Assert.AreEqual("Andhra Pradesh", value);
         }
         /// <summary>
+        /// UseCase4
         /// It checks the last state 
         /// of the state census code data .
         /// </summary>
         [Test]
         public void Csv_state_census_lastState()
         {
-            stateanalyser.Sorting_CsV_File(state_census_path, sorted_census_csv);
-            stateanalyser.Write_Csv_to_json(sorted_census_csv, json_census);
             int a = stateanalyser.Json_file_count(json_census);
-            var value = stateanalyser.Access_Key_Value(a - 1, "State", json_census);
+            var value = stateanalyser.Access_Key_Value(a- 1, "State", json_census);
             Assert.AreEqual("West Bengal", value);
         }
         /// <summary>
+        /// UseCase4
         /// It cheks the first state of State Code json file
         /// and check it .
         /// </summary>
         [Test]
         public void State_Code_Json_First_State()
         {
-            stateanalyser.Write_Csv_to_json(state_code_path, json_state_data);
             var value = stateanalyser.Access_Key_Value(0, "State Name", json_state_data);
             Assert.AreEqual("Andaman and Nicobar Islands", value);
         }
         /// <summary>
+        /// UseCase4
         /// It check the last state of 
         /// state code json file .
         /// </summary>
         [Test]
         public void State_Code_Json_Last_State()
         {
-            stateanalyser.Write_Csv_to_json(state_code_path, json_state_data);
             int a = stateanalyser.Json_file_count(json_state_data);
             var value = stateanalyser.Access_Key_Value(a - 1, "State Name", json_state_data);
             Assert.AreEqual("West Bengal", value);
+        }
+        /// <summary>
+        /// Numbers of count to swape 
+        /// the json file to get least
+        /// Population order.
+        /// </summary>
+        [Test]
+        public void Number_Of_Sorted_State()
+        {
+            stateanalyser.Write_Csv_to_json(state_census_path, json_path);
+            Assert.AreEqual(54, stateanalyser.SortJson_File("Population", json_path, json_path));
         }
     }
 }
