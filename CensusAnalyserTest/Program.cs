@@ -3,6 +3,7 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace CensusAnalyserTest
 {
@@ -27,15 +28,19 @@ namespace CensusAnalyserTest
             Console.WriteLine("Total record in StateCode by using builder class :" + m);
             CSVState st = new CSVState();
             int s = st.LoadStateData(@"D:\Imran\CensusAnalyser\CensusAnalyserTest\CSVFile\StateCensusData.csv", ',', "State,Population,AreaInSqKm,DensityPerSqKm");
-            Console.WriteLine("Count is :" + s);
-            StateCensusAnalyser st1 = new StateCensusAnalyser();
+            Console.WriteLine("Count is :" + s);*/
+            /*StateCensusAnalyser st1 = new StateCensusAnalyser();
             st1.SortJson_File("Population", @"D:\Imran\CensusAnalyser\CensusAnalyserTest\SortedStateCensus.json", @"D:\Imran\CensusAnalyser\CensusAnalyserTest\SortedStateCensusInPopulation.json");
             st1.SortJson_File("DensityPerSqKm", @"D:\Imran\CensusAnalyser\CensusAnalyserTest\SortedStateCensus.json", @"D:\Imran\CensusAnalyser\CensusAnalyserTest\SortedStateCensusByDensity.json");
             st1.SortJson_File("AreaInSqKm", @"D:\Imran\CensusAnalyser\CensusAnalyserTest\SortedStateCensus.json", @"D:\Imran\CensusAnalyser\CensusAnalyserTest\SortedStateCensusByArea.json");
-           */
+              */
             CsvMerge cmr = new CsvMerge();
             cmr.Test();
+            StateCensusAnalyser st = new StateCensusAnalyser();
+            st.Write_Csv_to_json(@"D:\Imran\CensusAnalyser\CensusAnalyserTest\CSVFile\MergeData.csv", @"D:\Imran\CensusAnalyser\CensusAnalyserTest\IndianCensusData.json");
+            st.Write_Csv_to_json(@"D:\Imran\CensusAnalyser\CensusAnalyserTest\CSVFile\USCensusData.csv", @"D:\Imran\CensusAnalyser\CensusAnalyserTest\US_Census_Json_Data.json");
         }
-
     }
+
 }
+

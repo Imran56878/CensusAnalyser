@@ -38,16 +38,16 @@ namespace CensusAnalyserTest
                     merge(code[i], census[j], lines_code, lines_census);
                 }
 
-                if (count ==0)
+                if (count == 0)
                 {
                     // It adds new State that is not common
                     // in both csv file;
-                    string sa = String.Concat(code[i]);
+                    string sa = String.Concat(code[i]+",0,0,0,0");
                     la.Add(sa);
                     
                 }
             }
-            Console.WriteLine(" ");
+            File.WriteAllLines(merge_file, la);
         }
         /// <summary>
         /// It will merge the two csv file
@@ -69,7 +69,7 @@ namespace CensusAnalyserTest
                 la.Add(s);
                 count = 1;
             }
-            File.WriteAllLines(merge_file, la);
+           // File.WriteAllLines(merge_file, la);
         }
     }
 }
