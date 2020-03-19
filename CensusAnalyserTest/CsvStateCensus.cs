@@ -9,13 +9,35 @@ namespace CensusAnalyserTest
     /// Load StateCensusData csv file
     /// </summary>
     /// <seealso cref="CensusAnalyserTest.ICSVBuilder" />
-    public class CsvStateCensus : ICSVBuilder
+    public class CsvStateCensus : ICSVBuilder   , IAdapter
     {
+        IAdapter data;
+
+        public CsvStateCensus()
+        {
+
+        }
+
+        public CsvStateCensus(IAdapter data)
+        {
+            this.data = data;
+        }
         /// <summary>
-        /// The total record
-        /// To load csv data
+        /// Sorts the json file.
+        /// override function of stateCensusAnalyser
         /// </summary>
-        int totalRecord = 0;
+        /// <param name="name">The name.</param>
+        /// <param name="read_path">The read path.</param>
+        /// <param name="write_path">The write path.</param>
+        /// <returns></returns>
+        public int SortJson_File(string name, string read_path, string write_path)
+        {
+            return data.SortJson_File(name, read_path, write_path);
+        }
+        public void Test()
+        {
+            data.Test();
+        }
         /// <summary>
         /// Loads the state data.
         /// </summary>

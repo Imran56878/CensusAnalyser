@@ -9,7 +9,7 @@ namespace CensusAnalyserTest
     /// This class merges 
     /// the two csv file .
     /// </summary>
-    public class CsvMerge
+    public class CsvMerge  :IAdapter
     {
         string path_code = @"D:\Imran\CensusAnalyser\CensusAnalyserTest\CSVFile\StateCode.csv";
         string path_census = @"D:\Imran\CensusAnalyser\CensusAnalyserTest\CSVFile\SortedStateCensusData.csv";
@@ -69,7 +69,19 @@ namespace CensusAnalyserTest
                 la.Add(s);
                 count = 1;
             }
-           // File.WriteAllLines(merge_file, la);
+
+        }
+        /// <summary>
+        /// Sorts the json file.
+        /// </summary>
+        /// <param name="name">The name.</param>
+        /// <param name="read_path">The read path.</param>
+        /// <param name="write_path">The write path.</param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException">UnDefined but invoked</exception>
+        public int SortJson_File(string name, string read_path, string write_path)
+        {
+            throw new NotImplementedException("UnDefined");
         }
     }
 }

@@ -15,8 +15,8 @@ namespace CensusAnalyserTest
     /// This class is used for checking the record 
     /// or file path or given csv extension is not found  
     /// </summary>
-    public class StateCensusAnalyser : ICSVBuilder
-    {  
+    public class StateCensusAnalyser : ICSVBuilder, IAdapter
+    {
         int totalRecord = 0;
         /// <summary>
         /// Loads the state data.
@@ -30,7 +30,7 @@ namespace CensusAnalyserTest
             string[] str = File.ReadAllLines(path);
             totalRecord = str.Length;
             //  To ignore header lines count -1 is added.
-            return totalRecord-1;
+            return totalRecord - 1;
 
         }
         /// <summary>
@@ -40,7 +40,7 @@ namespace CensusAnalyserTest
         /// </summary>
         public void Sorting_CsV_File(string _read_csv_path, string _write_csv_path)
         {
-            string[] lines = File.ReadAllLines(_read_csv_path );
+            string[] lines = File.ReadAllLines(_read_csv_path);
             List<string> amn = new List<string>();
 
             for (int i = 1; i < lines.Length; i++)
@@ -50,7 +50,7 @@ namespace CensusAnalyserTest
             }
             amn.Sort();
             amn.Insert(0, lines[0]);
-            File.WriteAllLines(_write_csv_path , amn);  
+            File.WriteAllLines(_write_csv_path, amn);
         }
         /// <summary>
         /// Writes the CSV to JSV.
@@ -59,13 +59,13 @@ namespace CensusAnalyserTest
         /// <param name="_write_json_path">The write json path.</param>
         public void Write_Csv_to_json(string _readcsv_path, string _write_json_path)
         {
-            var textline = File.ReadAllText(_readcsv_path );
+            var textline = File.ReadAllText(_readcsv_path);
             StringBuilder sb = new StringBuilder();
             using (var p = ChoCSVReader.LoadText(textline).WithFirstLineHeader())
             {
                 using (var w = new ChoJSONWriter(sb)) w.Write(p);
             }
-            File.WriteAllText(_write_json_path , sb.ToString());
+            File.WriteAllText(_write_json_path, sb.ToString());
 
         }
         /// <summary>
@@ -104,9 +104,9 @@ namespace CensusAnalyserTest
             int count = 0;
             var mj = File.ReadAllText(read_path);
             JArray a = JArray.Parse(mj);
-            for (int i=0; i<a.Count; i++ )
+            for (int i = 0; i < a.Count; i++)
             {
-               
+
                 for (int j = 0; j < a.Count - 1; j++)
                 {
                     var value = a[i][name].CastTo<int>();
@@ -118,12 +118,21 @@ namespace CensusAnalyserTest
                         a[i] = a[j];
                         a[j] = temp;
                     }
-                }  
-                
+                }
+
             }
-            File.WriteAllText(write_path , a.ToString());
+            File.WriteAllText(write_path, a.ToString());
             return count;
-            
+
+        }
+        /// <summary>
+        /// Tests this instance.
+        /// This method is override here .
+        /// </summary>
+        /// <exception cref="NotImplementedException"></exception>
+        public void Test()
+        {
+            throw new NotImplementedException(""); 
         }
     }
 }
