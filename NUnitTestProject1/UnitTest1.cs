@@ -212,6 +212,16 @@ namespace NUnitTestProject1
             IAdapter adapter = new CsvStateCensus(mrg);
             adapter.Test();
         }
-       
+        /// <summary>
+        /// Uses the json file sorting in most populua order
+        /// of Us census Data .
+        /// </summary>
+        [Test]
+        public void US_Json_File_Sorting_In_Most_Populua_order()
+        {
+            IAdapter adapter = new CsvStateCensus(stateanalyser);
+            int actual = adapter.SortJson_File("Population", us_json_path, us_json_population_order);
+            Assert.AreEqual(627,actual);
+        }
     }
 }
