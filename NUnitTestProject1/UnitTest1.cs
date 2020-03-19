@@ -17,10 +17,12 @@ namespace NUnitTestProject1
         string Census_Data_header = "State,Population,AreaInSqKm,DensityPerSqKm";
         string State_code_header = "SrNo,State Name,TIN,StateCode";
         string sorted_census_csv = @"D:\Imran\CensusAnalyser\CensusAnalyserTest\CSVFile\SortedStateCensusData.csv";
-        string json_census = @"D:\Imran\CensusAnalyser\CensusAnalyserTest\SortedStateCensus.json";
+        string json_census_state = @"D:\Imran\CensusAnalyser\CensusAnalyserTest\SortedStateCensus.json";
         string sorted_state_ = @"D:\Imran\CensusAnalyser\CensusAnalyserTest\CSVFile\SortedStateCodeData.csv";
-        string json_state_data = @"D:\Imran\CensusAnalyser\CensusAnalyserTest\SortedStateCode.json";
-        string json_path = @"D:\Imran\CensusAnalyser\CensusAnalyserTest\SortedStateCensusInPopulation.json";
+        string json_state_order_data = @"D:\Imran\CensusAnalyser\CensusAnalyserTest\SortedStateCode.json";
+        string json_path_population_order = @"D:\Imran\CensusAnalyser\CensusAnalyserTest\SortedStateCensusInPopulation.json";
+        string us_json_path = @"D:\Imran\CensusAnalyser\CensusAnalyserTest\US_Census_Json_Data.json";
+        string us_json_population_order = @"D:\Imran\CensusAnalyser\CensusAnalyserTest\US_Census_population_order_Data.json";
         StateCensusAnalyser stateanalyser = new StateCensusAnalyser();
         DelegateBuilderMethod delegatebulder = new DelegateBuilderMethod(CsvBuilderDesign.BuilderMethod);
 
@@ -153,8 +155,8 @@ namespace NUnitTestProject1
         public void Csv_state_census_firstState()
         {
             stateanalyser.Sorting_CsV_File(state_census_path, sorted_census_csv);
-            stateanalyser.Write_Csv_to_json(sorted_census_csv, json_census);
-            var value = stateanalyser.Access_Key_Value(0, "State", json_census);
+            stateanalyser.Write_Csv_to_json(sorted_census_csv, json_census_state);
+            var value = stateanalyser.Access_Key_Value(0, "State", json_census_state);
             Assert.AreEqual("Andhra Pradesh", value);
         }
         /// <summary>
@@ -165,8 +167,8 @@ namespace NUnitTestProject1
         [Test]
         public void Csv_state_census_lastState()
         {
-            int a = stateanalyser.Json_file_count(json_census);
-            var value = stateanalyser.Access_Key_Value(a- 1, "State", json_census);
+            int a = stateanalyser.Json_file_count(json_census_state);
+            var value = stateanalyser.Access_Key_Value(a- 1, "State", json_census_state);
             Assert.AreEqual("West Bengal", value);
         }
         /// <summary>
@@ -177,7 +179,7 @@ namespace NUnitTestProject1
         [Test]
         public void State_Code_Json_First_State()
         {
-            var value = stateanalyser.Access_Key_Value(0, "State Name", json_state_data);
+            var value = stateanalyser.Access_Key_Value(0, "State Name", json_state_order_data);
             Assert.AreEqual("Andaman and Nicobar Islands", value);
         }
         /// <summary>
@@ -188,8 +190,8 @@ namespace NUnitTestProject1
         [Test]
         public void State_Code_Json_Last_State()
         {
-            int a = stateanalyser.Json_file_count(json_state_data);
-            var value = stateanalyser.Access_Key_Value(a - 1, "State Name", json_state_data);
+            int a = stateanalyser.Json_file_count(json_state_order_data);
+            var value = stateanalyser.Access_Key_Value(a - 1, "State Name", json_state_order_data);
             Assert.AreEqual("West Bengal", value);
         }
         /// <summary>
@@ -198,10 +200,18 @@ namespace NUnitTestProject1
         /// Population order.
         /// </summary>
         [Test]
-        public void Number_Of_Sorted_State()
+        public void Number_Of_Sorted_State_PopulationOrder()
         {
-            stateanalyser.Write_Csv_to_json(state_census_path, json_path);
-            Assert.AreEqual(54, stateanalyser.SortJson_File("Population", json_path, json_path));
+            stateanalyser.Write_Csv_to_json(state_census_path, json_path_population_order);
+            Assert.AreEqual(54, stateanalyser.SortJson_File("Population", json_path_population_order, json_path_population_order));
         }
+        [Test]
+        public void Indian_Census_Data_load_Csv_File()
+        {
+            CsvMerge mrg = new CsvMerge();
+            IAdapter adapter = new CsvStateCensus(mrg);
+            adapter.Test();
+        }
+       
     }
 }
